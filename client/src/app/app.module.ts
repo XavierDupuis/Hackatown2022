@@ -1,20 +1,13 @@
 import { NgModule } from '@angular/core';
+// import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { MealCardComponent } from './meals/meal-card/meal-card.component';
-import { MealCardListComponent } from '@app/meals/meal-card-list/meal-card-list.component';
-import { ProfilPageComponent } from './profil-page/profil-page.component';
-import { ResearchBarComponent } from './research-bar/research-bar.component';
+import { AppComponent } from '@app/app.component';
+import { AppRoutingModule } from '@app/modules/app-routing.module';
+import { AppMaterialModule } from '@app/modules/material.module';
 
 @NgModule({
-    declarations: [
-        AppComponent, 
-        MealCardComponent, 
-        MealCardListComponent, 
-        ProfilPageComponent, ResearchBarComponent
-    ],
-    imports: [BrowserModule, AppRoutingModule],
+    declarations: [AppComponent],
+    imports: [AppMaterialModule, BrowserModule, AppRoutingModule /* , FormsModule*/],
     providers: [],
     bootstrap: [AppComponent],
 })

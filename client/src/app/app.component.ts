@@ -6,20 +6,6 @@ import { Component } from '@angular/core';
     styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-    title = 'client';
-    constructor() {
-    }
-
-    // private a() {
-
-    // }
-
-    b() 
-    {
-
-    }
-
-    // private c() {
-        
-    // }
+    title = 'Client';
+    constructor() {}
 }
