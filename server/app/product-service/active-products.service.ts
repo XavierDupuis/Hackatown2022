@@ -17,7 +17,7 @@ export class ActiveProductService {
     }
 
     async addProduct(product: Product): Promise<void> {
-        await this.collection.insertOne({ name: product.name, price: product.price, quantity: product.quantity });
+        await this.collection.insertOne({ name: product.name, price: product.price, quantity: product.quantity, sellerId: product.sellerId });
     }
 
     async deleteProduct(product: Product): Promise<boolean> {

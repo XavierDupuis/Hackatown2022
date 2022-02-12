@@ -1,11 +1,14 @@
 import { Review, SellerProfile } from '@app/controllers/seller.interface';
-import { DatabaseService } from '@app/database/database.service';
+import { PRODUCTS_COLLECTION } from '@app/database-service/constants';
+import { DatabaseService } from '@app/database-service/database.service';
 import { Message } from '@app/message';
-import { Collection } from 'mongodb';
+import { Product } from '@app/product-service/product.interface';
+import { Collection, Document } from 'mongodb';
 import { Service } from 'typedi';
 
 // TODO Check for request auth
 
+const SELLER_COLLECTION = 'sellerProfile';
 @Service()
 export class SellerProfileService {
     clientMessages: Message[];
@@ -14,44 +17,47 @@ export class SellerProfileService {
         this.clientMessages = [];
     }
 
-    get collection(): Collection<SellerProfile> {
-        return this.databaseService.database.collection('sellerProfile');
+    get sellerCollection(): Collection<SellerProfile> {
+        return this.databaseService.database.collection(SELLER_COLLECTION);
+    }
+
+    get productsCollection(): Collection<Product> {
+        return this.databaseService.database.collection(PRODUCTS_COLLECTION);
     }
 
     async getFullName(id: string): Promise<string> {
-        const fullName = this.collection.find({ _id: id }).project({ name: 1 }).toString();
+        const fullName = this.sellerCollection.find({ _id: id }).project({ name: 1 }).toString();
         return fullName;
     }
 
     async getDescription(id: string): Promise<string> {
-        const description = this.collection.find({ _id: id }).project({ description: 1 }).toString();
+        const description = this.sellerCollection.find({ _id: id }).project({ description: 1 }).toString();
         return description;
     }
 
-    // TODO Object Products[]
-    async getProducts(id: string): Promise<string> {
-        const products = this.collection.find({ _id: id }).project({ availableProducts: 1 }).toString();
+    async getProducts(id: string): Promise<Product[]> {
+        const products = this.productsCollection.find({ sellerId: id }).toArray();
         return products;
     }
 
     // TODO Object Products[] // toArray()
     async getHistory(id: string): Promise<string> {
-        const products = this.collection.find({ _id: id }).project({ productsHistory: 1 }).toString();
+        const products = this.sellerCollection.find({ _id: id }).project({ productsHistory: 1 }).toString();
         return products;
     }
 
     async getImageUrl(id: string): Promise<string> {
-        const imageUrl = this.collection.find({ _id: id }).project({ imageUrl: 1 }).toString();
+        const imageUrl = this.sellerCollection.find({ _id: id }).project({ imageUrl: 1 }).toString();
         return imageUrl;
     }
 
-    // TODO Object Reviews[] // toArray()
-    async getReviews(id: string): Promise<string> {
-        const reviewList = this.collection.find({ _id: id }).project({ reviews: 1 }).toString();
-        return reviewList;
+    // TODO Validate if this works
+    async getReviews(id: string): Promise<Document> {
+        const reviews = this.sellerCollection.find({ _id: id }).project({ reviews: 1 });
+        return reviews;
     }
 
-    async addReview(review: Review): Promise<void> {
-        await this.collection.updateOne({ _id: review.sellerId }, { $addToSet: { reviews: review } });
+    async addReview(review: Review) {
+        await this.sellerCollection.updateOne({ _id: review.sellerId }, { $addToSet: { reviews: review } });
     }
 }

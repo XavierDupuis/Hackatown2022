@@ -82,7 +82,7 @@ export class SellerProfileController {
         this.router.post('/review', async (req, res) => {
             try {
                 const review = req.body;
-                this.sellerProfileService.addReview(review);
+                await this.sellerProfileService.addReview(review);
             } catch (e) {
                 res.sendStatus(StatusCodes.NOT_FOUND);
             }

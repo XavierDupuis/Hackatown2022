@@ -1,12 +1,12 @@
+import { Product } from '@app/product-service/product.interface';
+
 export interface SellerProfile {
-    // TODO make Review[]
+    _id: string;
     reviews: Review[];
-    // TODO make Product[]
-    availableProducts: string[];
+    availableProducts: Product[];
     name: string;
     description: string;
-    // TODO make Product[]
-    productsHistory: string[];
+    productsHistory: Product[];
     imageUrl: string;
 }
 
