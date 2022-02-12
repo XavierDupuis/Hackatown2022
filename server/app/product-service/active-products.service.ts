@@ -1,6 +1,6 @@
 import { ACTIVE_PRODUCTS_COLLECTION } from '@app/database-service/constants';
 import { DatabaseService } from '@app/database-service/database.service';
-import { Product } from '@app/product-service/product.interface';
+import { Product } from '@app/interfaces/product.interface';
 import { Collection } from 'mongodb';
 import { Service } from 'typedi';
 
