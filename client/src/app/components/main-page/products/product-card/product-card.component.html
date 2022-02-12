@@ -1,8 +1,14 @@
 <mat-card>
     <img class="image" [src]="product.imageURL" />
-    <div>{{ product.name }}</div>
-    <div>{{ product.description }}</div>
-    <div>{{ product.price }}</div>
-    <div>{{ product.qtyLeft }}</div>
-    <div>{{ product.maxPickupDate }}</div>
+    <h2>{{ product.name }}</h2>
+    <div>
+        <i>{{ product.description }}</i>
+    </div>
+    <div>{{ product.price / 100 | currency }}</div>
+    <div>
+        Left Quantity : <strong>{{ product.qtyLeft }}</strong>
+    </div>
+    <div>
+        Last Date : <strong>{{ product.maxPickupDate | date }}</strong>
+    </div>
 </mat-card>
