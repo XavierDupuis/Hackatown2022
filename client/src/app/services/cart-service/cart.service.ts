@@ -9,6 +9,9 @@ export class CartService {
     constructor() {}
 
     addProduct(product: ProductAddedToCart) {
+        if (!product) {
+            return;
+        }
         this.selectedProducts.push(product);
     }
 }

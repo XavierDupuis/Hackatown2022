@@ -18,8 +18,8 @@ export class CartModalComponent implements OnInit {
         },
         {
             columnDef: 'price',
-            header: 'Unit Price',
-            cell: (cartProduct: ProductAddedToCart) => `${cartProduct.product.price}`,
+            header: 'Unit Price ($)',
+            cell: (cartProduct: ProductAddedToCart) => `${cartProduct.product.price / 100}`,
         },
         {
             columnDef: 'quantity',
@@ -28,8 +28,13 @@ export class CartModalComponent implements OnInit {
         },
         {
             columnDef: 'subtotal',
-            header: 'Sub Total',
+            header: 'Sub Total ($)',
             cell: (cartProduct: ProductAddedToCart) => `${(cartProduct.quantity * cartProduct.product.price) / 100}`,
+        },
+        {
+            columnDef: 'remove',
+            header: 'Remove',
+            cell: () => `${'<mat-icon>cancel</mat-icon>'}`,
         },
     ];
 

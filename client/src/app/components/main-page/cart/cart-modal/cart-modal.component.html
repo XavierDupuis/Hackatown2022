@@ -11,7 +11,9 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
-    <mat-card>Total : {{ totalCost }}</mat-card>
+    <mat-card>
+        <h2>Total : {{ totalCost | currency }}</h2>
+    </mat-card>
 </div>
 <ng-template #empty_cart>
     <p>Empty Cart</p>
