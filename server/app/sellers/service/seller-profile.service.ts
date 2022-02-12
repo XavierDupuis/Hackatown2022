@@ -3,7 +3,7 @@ import { DatabaseService } from '@app/database-service/database.service';
 import { Product } from '@app/interfaces/product.interface';
 import { NewSellerProfile, Review, SellerProfile, SellerProfileCreation } from '@app/sellers/controllers/seller.interface';
 import { SELLER_COLLECTION } from '@app/sellers/seller-constants';
-import { Collection, Document } from 'mongodb';
+import { Collection, Document, ObjectId } from 'mongodb';
 import { Service } from 'typedi';
 
 @Service()
@@ -23,12 +23,18 @@ export class SellerProfileService {
     }
 
     async getFullName(id: string): Promise<string> {
-        const fullName = this.sellerCollection.find({ _id: id }).project({ name: 1 }).toString();
+        const fullName = this.sellerCollection
+            .find({ _id: new ObjectId(id) })
+            .project({ name: 1 })
+            .toString();
         return fullName;
     }
 
     async getDescription(id: string): Promise<string> {
-        const description = this.sellerCollection.find({ _id: id }).project({ description: 1 }).toString();
+        const description = this.sellerCollection
+            .find({ _id: new ObjectId(id) })
+            .project({ description: 1 })
+            .toString();
         return description;
     }
 
@@ -44,22 +50,25 @@ export class SellerProfileService {
     }
 
     async getImageUrl(id: string): Promise<string> {
-        const imageUrl = this.sellerCollection.find({ _id: id }).project({ imageUrl: 1 }).toString();
+        const imageUrl = this.sellerCollection
+            .find({ _id: new ObjectId(id) })
+            .project({ imageUrl: 1 })
+            .toString();
         return imageUrl;
     }
 
     // TODO Validate if this works
     async getReviews(id: string): Promise<Document> {
-        const reviews = this.sellerCollection.find({ _id: id }).project({ reviews: 1 });
+        const reviews = this.sellerCollection.find({ _id: new ObjectId(id) }).project({ reviews: 1 });
         return reviews;
     }
 
     async addReview(review: Review) {
-        await this.sellerCollection.updateOne({ _id: review.sellerId }, { $addToSet: { reviews: review } });
+        await this.sellerCollection.updateOne({ _id: new ObjectId(review.sellerId) }, { $addToSet: { reviews: review } });
     }
 
     async getProfile(id: string) {
-        await this.sellerCollection.findOne({ _id: id });
+        await this.sellerCollection.findOne({ _id: new ObjectId(id) });
     }
 
     async createProfile(creationParams: SellerProfileCreation) {
