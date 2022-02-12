@@ -1,7 +1,7 @@
 import { HttpException } from '@app/classes/http.exception';
 import { OrderController } from '@app/controllers/orders.controller';
 import { ProductController } from '@app/controllers/product.controller';
-import { SellerProfileController } from '@app/controllers/seller.profile.controller';
+import { SellerProfileController } from '@app/sellers/controllers/seller-profile.controller';
 import * as cookieParser from 'cookie-parser';
 import * as cors from 'cors';
 import * as express from 'express';
@@ -44,11 +44,7 @@ export class Application {
         this.app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerJSDoc(this.swaggerOptions)));
         this.app.use('/api/products', this.productController.router);
         this.app.use('/api/orders', this.orderController.router);
-
-        this.app.use('/', (req, res) => {
-            res.redirect('/api/docs');
-        });
-        this.app.use('/api/sellerProfile', this.sellerProfileController.router);
+        this.app.use('/api/sellers', this.sellerProfileController.router);
 
         this.errorHandling();
     }

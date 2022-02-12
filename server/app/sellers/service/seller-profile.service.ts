@@ -1,21 +1,14 @@
-import { Review, SellerProfile } from '@app/controllers/seller.interface';
 import { ACTIVE_PRODUCTS_COLLECTION, PRODUCTS_COLLECTION } from '@app/database-service/constants';
 import { DatabaseService } from '@app/database-service/database.service';
 import { Product } from '@app/interfaces/product.interface';
-import { Message } from '@app/message';
+import { NewSellerProfile, Review, SellerProfile, SellerProfileCreation } from '@app/sellers/controllers/seller.interface';
+import { SELLER_COLLECTION } from '@app/sellers/seller-constants';
 import { Collection, Document } from 'mongodb';
 import { Service } from 'typedi';
 
-// TODO Check for request auth
-
-export const SELLER_COLLECTION = 'sellerProfile';
 @Service()
 export class SellerProfileService {
-    clientMessages: Message[];
-
-    constructor(private readonly databaseService: DatabaseService) {
-        this.clientMessages = [];
-    }
+    constructor(private databaseService: DatabaseService) {}
 
     get sellerCollection(): Collection<SellerProfile> {
         return this.databaseService.database.collection(SELLER_COLLECTION);
@@ -63,5 +56,22 @@ export class SellerProfileService {
 
     async addReview(review: Review) {
         await this.sellerCollection.updateOne({ _id: review.sellerId }, { $addToSet: { reviews: review } });
+    }
+
+    async getProfile(id: string) {
+        await this.sellerCollection.findOne({ _id: id });
+    }
+
+    async createProfile(creationParams: SellerProfileCreation) {
+        const newSellerProfile = this.createNewSellerProfile(creationParams);
+        await this.sellerCollection.insertOne(newSellerProfile);
+    }
+
+    private createNewSellerProfile(creationParams: SellerProfileCreation) {
+        const newProfile = creationParams as NewSellerProfile;
+        // TODO add url from message server
+        newProfile.imageUrl = 'default_image';
+        newProfile.reviews = [];
+        return newProfile;
     }
 }

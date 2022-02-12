@@ -1,8 +1,12 @@
 import {
-    ACTIVE_PRODUCTS_COLLECTION, BASIC_ORDERS, BASIC_PRODUCTS,
-    BASIC_SELLER, ORDERS_COLLECTION, PRODUCTS_COLLECTION
+    ACTIVE_PRODUCTS_COLLECTION,
+    BASIC_ORDERS,
+    BASIC_PRODUCTS,
+    BASIC_SELLER,
+    ORDERS_COLLECTION,
+    PRODUCTS_COLLECTION
 } from '@app/database-service/constants';
-import { SELLER_COLLECTION } from '@app/services/seller.profile.service';
+import { SELLER_COLLECTION } from '@app/sellers/seller-constants';
 import { CollectionInfo, Db, MongoClient } from 'mongodb';
 import { Service } from 'typedi';
 
@@ -43,7 +47,7 @@ export class DatabaseService {
                 return;
             }
             await this.db.createCollection(name);
-            await this.db.collection(name).createIndex({ id: 1 });
+            await this.db.collection(name);
             this.populateProductsCollection(name);
         } catch (error) {
             throw Error('Data base collection creation error');
@@ -58,9 +62,10 @@ export class DatabaseService {
             }
             await this.db.createCollection(SELLER_COLLECTION);
             // TODO index?
-            await this.db.collection(SELLER_COLLECTION).createIndex({ _id: 1 }, { unique: true });
+            await this.db.collection(SELLER_COLLECTION);
             this.populateSellerCollection();
         } catch (error) {
+            // console.error();
             throw Error('Data base collection creation error');
         }
     }
@@ -77,7 +82,8 @@ export class DatabaseService {
 
     private async populateSellerCollection() {
         try {
-            if ((await this.db.collection(SELLER_COLLECTION).countDocuments()) === 0) {
+            const documentCounts = await this.db.collection(SELLER_COLLECTION).countDocuments();
+            if (documentCounts === 0) {
                 await this.db.collection(SELLER_COLLECTION).insertMany(BASIC_SELLER); // TODO add default population
             }
         } catch (e) {
@@ -92,8 +98,9 @@ export class DatabaseService {
                 return;
             }
             await this.db.createCollection(name);
-            await this.db.collection(name).createIndex({ id: 1 });
-            if ((await this.db.collection(name).countDocuments()) === 0) {
+            await this.db.collection(name);
+            const documentCounts = await this.db.collection(name).countDocuments();
+            if (documentCounts === 0) {
                 await this.db.collection(name).insertMany(BASIC_ORDERS);
             }
         } catch (error) {
