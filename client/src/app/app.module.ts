@@ -16,7 +16,6 @@ import { Amplify } from 'aws-amplify';
 // eslint-disable-next-line no-restricted-imports
 import awsmobile from '../aws-exports';
 
-console.log(awsmobile);
 Amplify.configure(awsmobile);
 
 @NgModule({
