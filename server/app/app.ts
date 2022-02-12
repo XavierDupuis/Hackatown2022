@@ -1,5 +1,4 @@
 import { HttpException } from '@app/classes/http.exception';
-import { DateController } from '@app/controllers/date.controller';
 import { ProductController } from '@app/controllers/product.controller';
 import * as cookieParser from 'cookie-parser';
 import * as cors from 'cors';
@@ -16,7 +15,7 @@ export class Application {
     private readonly internalError: number = StatusCodes.INTERNAL_SERVER_ERROR;
     private readonly swaggerOptions: swaggerJSDoc.Options;
 
-    constructor(private readonly productController: ProductController, private readonly dateController: DateController) {
+    constructor(private readonly productController: ProductController) {
         this.app = express();
 
         this.swaggerOptions = {
@@ -38,7 +37,7 @@ export class Application {
     bindRoutes(): void {
         this.app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerJSDoc(this.swaggerOptions)));
         this.app.use('/api/products', this.productController.router);
-        this.app.use('/api/date', this.dateController.router);
+
         this.app.use('/', (req, res) => {
             res.redirect('/api/docs');
         });
