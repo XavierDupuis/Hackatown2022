@@ -1,4 +1,4 @@
-import { ACTIVE_PRODUCTS_COLLECTION, BASIC_PRODUCTS, PRODUCTS_COLLECTION } from '@app/database/constants';
+import { ACTIVE_PRODUCTS_COLLECTION, BASIC_PRODUCTS, PRODUCTS_COLLECTION } from '@app/database-service/constants';
 import { CollectionInfo, Db, MongoClient } from 'mongodb';
 import { Service } from 'typedi';
 
