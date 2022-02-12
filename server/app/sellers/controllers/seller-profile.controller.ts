@@ -29,6 +29,7 @@ export class SellerProfileController {
         });
 
         this.router.post('/create', async (req, res) => {
+            const { userId } = res.locals;
             const { name, description } = req.body;
             if (name === undefined || description === undefined) {
                 return res.sendStatus(ERROR);
@@ -38,7 +39,7 @@ export class SellerProfileController {
                 const params = {
                     name,
                     description,
-                    userId: 'allo',
+                    userId,
                 };
                 await this.sellerProfileService.createProfile(params);
                 return res.sendStatus(OK);

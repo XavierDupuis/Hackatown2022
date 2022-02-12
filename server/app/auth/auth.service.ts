@@ -45,6 +45,11 @@ export class AuthService {
     }
 
     async getUserId(token: string) {
+        // TODO remove in prod
+        const userMock = this.getUserIdMock(token);
+        if (userMock) {
+            return userMock;
+        }
         return await this.jwtValidator.validate(token);
     }
 }
