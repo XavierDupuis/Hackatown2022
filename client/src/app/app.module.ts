@@ -11,6 +11,13 @@ import { ResearchBarComponent } from '@app/components/main-page/research-bar/res
 import { ProfilePageComponent } from '@app/components/profile-page/profile-page.component';
 import { AppRoutingModule } from '@app/modules/app-routing.module';
 import { AppMaterialModule } from '@app/modules/material.module';
+import { AmplifyAuthenticatorModule } from '@aws-amplify/ui-angular';
+import { Amplify } from 'aws-amplify';
+// eslint-disable-next-line no-restricted-imports
+import awsmobile from '../aws-exports';
+
+console.log(awsmobile);
+Amplify.configure(awsmobile);
 
 @NgModule({
     declarations: [
@@ -22,7 +29,7 @@ import { AppMaterialModule } from '@app/modules/material.module';
         ProductCardComponent,
         ProductCardListComponent,
     ],
-    imports: [AppMaterialModule, BrowserModule, AppRoutingModule, BrowserAnimationsModule],
+    imports: [AppMaterialModule, BrowserModule, AppRoutingModule, BrowserAnimationsModule, AmplifyAuthenticatorModule],
     providers: [],
     bootstrap: [AppComponent],
 })

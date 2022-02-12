@@ -8,6 +8,13 @@
         <link rel="icon" type="image/x-icon" href="favicon.ico" />
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
     </head>
+    <!-- https://github.com/aws/aws-amplify/issues/678 fix: -->
+    <script>
+        if (global === undefined) {
+            var global = window;
+        }
+    </script>
+    <!-- https://github.com/aws/aws-amplify/issues/678 fix end-->
     <body>
         <app-root></app-root>
     </body>
