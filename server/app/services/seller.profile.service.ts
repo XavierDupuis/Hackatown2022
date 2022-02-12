@@ -1,47 +1,50 @@
 import { DatabaseService } from '@app/database/database.service';
 import { Message } from '@app/message';
+import { Collection } from 'mongodb';
 import { Service } from 'typedi';
 
 @Service()
 export class SellerProfileService {
     clientMessages: Message[];
-    // TODO database service
+
     constructor(private readonly databaseService: DatabaseService) {
         this.clientMessages = [];
     }
 
-    about(): Message {
-        return {
-            title: 'Basic Server About Page',
-            body: 'Try calling /api/docs to get the documentation',
-        };
+    get collection(): Collection {
+        return this.databaseService.database.collection('sellerProfile');
     }
 
-    // async helloWorld(): Promise<Message> {
-    //     return this.dateService
-    //         .currentTime()
-    //         .then((timeMessage: Message) => {
-    //             return {
-    //                 title: 'Hello world',
-    //                 body: 'Time is ' + timeMessage.body,
-    //             };
-    //         })
-    //         .catch((error: unknown) => {
-    //             return {
-    //                 title: 'Error',
-    //                 body: error as string,
-    //             };
-    //         });
-    // }
-
-    // TODO : ceci est à titre d'exemple. À enlever pour la remise
-    storeMessage(message: Message): void {
-        // eslint-disable-next-line no-console
-        console.log(message);
-        this.clientMessages.push(message);
+    async getFullName(id: string): Promise<string> {
+        const fullName = await this.collection.find({ _id: id }).project({ name: 1 }).toString();
+        return fullName;
     }
 
-    getAllMessages(): Message[] {
-        return this.clientMessages;
+    async getDescription(id: string): Promise<string> {
+        const description = await this.collection.find({ _id: id }).project({ description: 1 }).toString();
+        return description;
+    }
+
+    // TODO Object Products[]
+    async getProducts(id: string): Promise<string> {
+        const products = await this.collection.find({ _id: id }).project({ availableProducts: 1 }).toString();
+        return products;
+    }
+
+    // TODO Object Products[] // toArray()
+    async getHistory(id: string): Promise<string> {
+        const products = await this.collection.find({ _id: id }).project({ productsHistory: 1 }).toString();
+        return products;
+    }
+
+    async getImageUrl(id: string): Promise<string> {
+        const imageUrl = await this.collection.find({ _id: id }).project({ imageUrl: 1 }).toString();
+        return imageUrl;
+    }
+
+    // TODO Object Reviews[] // toArray()
+    async getReviews(id: string): Promise<string> {
+        const reviewList = await this.collection.find({ _id: id }).project({ reviews: 1 }).toString();
+        return reviewList;
     }
 }
