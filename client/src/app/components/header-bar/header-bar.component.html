@@ -1,12 +1,5 @@
-<mat-toolbar [class]="theme">
+<mat-toolbar>
     <mat-icon>help</mat-icon>
-    <div>
-        <mat-slide-toggle (click)="toggleTheme()"></mat-slide-toggle>
-        <mat-icon *ngIf="isCurrentThemeDark(); else light_theme">dark_mode</mat-icon>
-        <ng-template #light_theme>
-            <mat-icon>light_mode</mat-icon>
-        </ng-template>
-    </div>
     <a routerLink="/home">
         <h1>{{ title }}</h1>
     </a>

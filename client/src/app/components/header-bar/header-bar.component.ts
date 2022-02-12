@@ -1,5 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, Input, OnInit } from '@angular/core';
 import { CartService } from '@app/services/cart-service/cart.service';
 
 @Component({
@@ -9,29 +8,12 @@ import { CartService } from '@app/services/cart-service/cart.service';
 })
 export class HeaderBarComponent implements OnInit {
     @Input() title!: string;
-    @Input() theme: string;
-    @Output() themeChange = new EventEmitter<string>();
 
-    constructor(private cartService: CartService, private router: Router) {
-        this.viewSecond();
-    }
+    constructor(private cartService: CartService) {}
 
     get numberOfItemsInCart() {
         return this.cartService.numberOfItemsInCart;
     }
 
-    toggleTheme() {
-        this.theme = this.isCurrentThemeDark() ? 'light-theme' : 'dark-theme';
-    }
-
-    isCurrentThemeDark() {
-        return this.theme === 'dark-theme';
-    }
-
     ngOnInit(): void {}
-
-    viewSecond() {
-        console.log('asdsad');
-        this.router.navigate(['Second']);
-    }
 }
