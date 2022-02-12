@@ -1,8 +1,8 @@
 import { Review, SellerProfile } from '@app/controllers/seller.interface';
-import { PRODUCTS_COLLECTION } from '@app/database-service/constants';
+import { ACTIVE_PRODUCTS_COLLECTION, PRODUCTS_COLLECTION } from '@app/database-service/constants';
 import { DatabaseService } from '@app/database-service/database.service';
+import { Product } from '@app/interfaces/product.interface';
 import { Message } from '@app/message';
-import { Product } from '@app/product-service/product.interface';
 import { Collection, Document } from 'mongodb';
 import { Service } from 'typedi';
 
@@ -22,6 +22,10 @@ export class SellerProfileService {
     }
 
     get productsCollection(): Collection<Product> {
+        return this.databaseService.database.collection(ACTIVE_PRODUCTS_COLLECTION);
+    }
+
+    get historyCollection(): Collection<Product> {
         return this.databaseService.database.collection(PRODUCTS_COLLECTION);
     }
 
@@ -41,8 +45,8 @@ export class SellerProfileService {
     }
 
     // TODO Object Products[] // toArray()
-    async getHistory(id: string): Promise<string> {
-        const products = this.sellerCollection.find({ _id: id }).project({ productsHistory: 1 }).toString();
+    async getHistory(id: string): Promise<Product[]> {
+        const products = this.historyCollection.find({ sellerId: id }).toArray();
         return products;
     }
 
