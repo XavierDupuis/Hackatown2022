@@ -1,6 +1,9 @@
 export interface Product {
     name: string;
-    quantity: number;
+    description: string;
+    quantityInitial: number;
+    quantityLeft: number;
     price: number;
-    // imageUrl: URL;
+    imageURL: string;
+    maxPickupDate: Date;
 }

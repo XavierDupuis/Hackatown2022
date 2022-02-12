@@ -26,7 +26,7 @@ export class ModalSelectProductComponent implements OnInit {
         if (!this.productAddedToCart.quantity) {
             return false;
         }
-        return this.productAddedToCart.quantity <= this.productAddedToCart.product.qtyLeft;
+        return this.productAddedToCart.quantity <= this.productAddedToCart.product.quantityLeft;
     }
 
     ngOnInit(): void {}

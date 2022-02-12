@@ -4,8 +4,8 @@
         <h1>{{ title }}</h1>
     </a>
     <mat-icon [matBadge]="numberOfItemsInCart" matBadgePosition="after" matBadgeColor="accent" (click)="openCart()">shopping_cart</mat-icon>
-    <mat-icon>food_bank</mat-icon>
-    <a routerLink="/profile">
-        <mat-icon>account_circle</mat-icon>
-    </a>
+    <div (click)="testAddProduct()">
+        <mat-icon>food_bank</mat-icon>
+    </div>
+    <mat-icon routerLink="/profile">account_circle</mat-icon>
 </mat-toolbar>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from '@app/components/main-page/products/product-card/product.interface';
+import { ProductService } from '@app/services/product-service/product.service';
 
 @Component({
     selector: 'app-product-card-list',
@@ -7,42 +8,14 @@ import { Product } from '@app/components/main-page/products/product-card/product
     styleUrls: ['./product-card-list.component.scss'],
 })
 export class ProductCardListComponent implements OnInit {
-    products: Product[] = [
-        {
-            name: 'MEAL NAME 1',
-            description: 'Description du produit, peut être longue ou moins longue, mais elle sera longue pour tester css',
-            maxPickupDate: new Date('2019-01-16'),
-            imageURL: 'https://hips.hearstapps.com/hmg-prod/images/homemade-spaghetti-sauce-horizontal-1530890913.jpg',
-            price: 143.0,
-            qtyLeft: 29,
-        },
-        {
-            name: 'MEAL NAME 2',
-            description: 'Description du produit, peut être longue ou moins longue, mais elle sera longue pour tester css',
-            maxPickupDate: new Date('2019-01-16'),
-            imageURL: 'https://hips.hearstapps.com/del.h-cdn.co/assets/16/19/1462829771-sunshine-daydream.jpg',
-            price: 122.0,
-            qtyLeft: 72,
-        },
-        {
-            name: 'MEAL NAME 3',
-            description: 'Description du produit, peut être longue ou moins longue, mais elle sera longue pour tester css',
-            maxPickupDate: new Date('2019-01-16'),
-            imageURL: 'https://www.culturesforhealth.com/learn/wp-content/uploads/2016/04/Basic-Fruit-Smoothie-Recipe_header-1200x675.jpg',
-            price: 33.0,
-            qtyLeft: 12,
-        },
-        {
-            name: 'MEAL NAME 4',
-            description: 'Description du produit, peut être longue ou moins longue, mais elle sera longue pour tester css',
-            maxPickupDate: new Date('2019-01-16'),
-            imageURL: 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/meal-prep-index-1566932947.png',
-            price: 434.0,
-            qtyLeft: 22,
-        },
-    ];
+    products: Product[];
 
-    constructor() {}
+    constructor(private productService: ProductService) {
+        this.productService.requestProductList().subscribe((result) => {
+            const newProducts = result as Product[];
+            this.products = newProducts;
+        });
+    }
 
     ngOnInit(): void {}
 }
