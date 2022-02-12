@@ -1,4 +1,4 @@
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -37,7 +37,7 @@ Amplify.configure(awsmobile);
         ModalSelectProductComponent,
         CartModalComponent,
     ],
-    imports: [AppMaterialModule, BrowserModule, AppRoutingModule, BrowserAnimationsModule, AmplifyAuthenticatorModule, FormsModule],
+    imports: [AppMaterialModule, BrowserModule, AppRoutingModule, BrowserAnimationsModule, AmplifyAuthenticatorModule, FormsModule, HttpClientModule],
     providers: [
         {
             provide: HTTP_INTERCEPTORS,
