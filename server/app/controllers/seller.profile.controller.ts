@@ -1,8 +1,10 @@
 import { SellerProfileService } from '@app/services/seller.profile.service';
 import { Request, Response, Router } from 'express';
+import { StatusCodes } from 'http-status-codes';
 import { Service } from 'typedi';
 
 // const HTTP_STATUS_CREATED = 201;
+// TODO Check for request auth
 
 @Service()
 export class SellerProfileController {
@@ -16,33 +18,74 @@ export class SellerProfileController {
         this.router = Router();
 
         this.router.get('/sellerProfile/name/:id', async (req: Request, res: Response) => {
-            const fullName = await this.sellerProfileService.getFullName(req.params.id);
-            res.json(fullName);
+            try {
+                const fullName = await this.sellerProfileService.getFullName(req.params.id);
+                res.json(fullName);
+            } catch (e) {
+                res.sendStatus(StatusCodes.NOT_FOUND);
+            }
         });
 
         this.router.get('/sellerProfile/description/:id', async (req: Request, res: Response) => {
-            const description = await this.sellerProfileService.getDescription(req.params.id);
-            res.json(description);
+            try {
+                const description = await this.sellerProfileService.getDescription(req.params.id);
+                res.json(description);
+            } catch (e) {
+                res.sendStatus(StatusCodes.NOT_FOUND);
+            }
         });
 
         this.router.get('/sellerProfile/availableProducts/:id', async (req: Request, res: Response) => {
-            const productList = await this.sellerProfileService.getProducts(req.params.id);
-            res.json(productList);
+            try {
+                const productList = await this.sellerProfileService.getProducts(req.params.id);
+                res.json(productList);
+            } catch (e) {
+                res.sendStatus(StatusCodes.NOT_FOUND);
+            }
         });
 
         this.router.get('/sellerProfile/productsHistory/:id', async (req: Request, res: Response) => {
-            const historyList = await this.sellerProfileService.getHistory(req.params.id);
-            res.json(historyList);
+            try {
+                const historyList = await this.sellerProfileService.getHistory(req.params.id);
+                res.json(historyList);
+            } catch (e) {
+                res.sendStatus(StatusCodes.NOT_FOUND);
+            }
         });
 
         this.router.get('/sellerProfile/imageUrl/:id', async (req: Request, res: Response) => {
-            const imageUrl = await this.sellerProfileService.getImageUrl(req.params.id);
-            res.json(imageUrl);
+            try {
+                const imageUrl = await this.sellerProfileService.getImageUrl(req.params.id);
+                res.json(imageUrl);
+            } catch (e) {
+                res.sendStatus(StatusCodes.NOT_FOUND);
+            }
         });
 
+        // TODO Image server?
         this.router.get('/sellerProfile/reviews/:id', async (req: Request, res: Response) => {
-            const reviewList = await this.sellerProfileService.getReviews(req.params.id);
-            res.json(reviewList);
+            try {
+                const reviewList = await this.sellerProfileService.getReviews(req.params.id);
+                res.json(reviewList);
+            } catch (e) {
+                res.sendStatus(StatusCodes.NOT_FOUND);
+            }
+        });
+
+        // // TODO TODO
+        // this.router.post('/image', async (req, res) => {
+        //     // TODO Send image to image server and store url to database
+        //     console.log(req);
+        //     console.log(res);
+        // });
+
+        this.router.post('/review', async (req, res) => {
+            try {
+                const review = req.body;
+                this.sellerProfileService.addReview(review);
+            } catch (e) {
+                res.sendStatus(StatusCodes.NOT_FOUND);
+            }
         });
 
         // this.router.get('/about', (req: Request, res: Response) => {

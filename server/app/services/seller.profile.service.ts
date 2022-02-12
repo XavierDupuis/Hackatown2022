@@ -1,7 +1,10 @@
+import { Review, SellerProfile } from '@app/controllers/seller.interface';
 import { DatabaseService } from '@app/database/database.service';
 import { Message } from '@app/message';
 import { Collection } from 'mongodb';
 import { Service } from 'typedi';
+
+// TODO Check for request auth
 
 @Service()
 export class SellerProfileService {
@@ -11,7 +14,7 @@ export class SellerProfileService {
         this.clientMessages = [];
     }
 
-    get collection(): Collection {
+    get collection(): Collection<SellerProfile> {
         return this.databaseService.database.collection('sellerProfile');
     }
 
@@ -46,5 +49,9 @@ export class SellerProfileService {
     async getReviews(id: string): Promise<string> {
         const reviewList = await this.collection.find({ _id: id }).project({ reviews: 1 }).toString();
         return reviewList;
+    }
+
+    async addReview(review: Review): Promise<void> {
+        await this.collection.updateOne({ _id: review.sellerId }, { $addToSet: { reviews: review } });
     }
 }
