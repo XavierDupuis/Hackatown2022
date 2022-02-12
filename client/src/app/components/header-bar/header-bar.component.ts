@@ -29,7 +29,6 @@ export class HeaderBarComponent implements OnInit {
     }
 
     name = 1;
-
     testAddProduct() {
         const testProduct: Product = {
             name: 'testName' + this.name++,
@@ -40,6 +39,6 @@ export class HeaderBarComponent implements OnInit {
             imageURL: 'https://hips.hearstapps.com/hmg-prod/images/homemade-spaghetti-sauce-horizontal-1530890913.jpg',
             maxPickupDate: new Date('2019-01-16'),
         };
-        this.productService.addProduct(testProduct);
+        this.productService.addProduct(testProduct).subscribe();
     }
 }

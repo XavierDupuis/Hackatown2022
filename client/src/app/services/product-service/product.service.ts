@@ -18,6 +18,6 @@ export class ProductService {
     }
 
     addProduct(product: Product) {
-        return this.http.post(`${environment.serverURL}/products`, product, { responseType: 'text' });
+        return this.http.post(`${environment.serverURL}/products`, product, { responseType: 'json' });
     }
 }
