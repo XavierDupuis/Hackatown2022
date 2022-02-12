@@ -1,0 +1,11 @@
+mat-card {
+    margin: 2%;
+    display: flex;
+    flex-direction: column;
+}
+
+.image {
+    max-width: 60%;
+    height: auto;
+    align-self: center;
+}
