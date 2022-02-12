@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { CartModalComponent } from '@app/components/main-page/cart/cart-modal/cart-modal.component';
 import { CartService } from '@app/services/cart-service/cart.service';
 
 @Component({
@@ -9,11 +11,18 @@ import { CartService } from '@app/services/cart-service/cart.service';
 export class HeaderBarComponent implements OnInit {
     @Input() title!: string;
 
-    constructor(private cartService: CartService) {}
+    constructor(private cartService: CartService, public dialog: MatDialog) {}
 
     get numberOfItemsInCart() {
-        return this.cartService.numberOfItemsInCart;
+        return this.cartService.selectedProducts.length;
     }
 
     ngOnInit(): void {}
+
+    openCart() {
+        this.dialog.open(CartModalComponent, {
+            width: '80%',
+            height: '60%',
+        });
+    }
 }

@@ -1,0 +1,16 @@
+mat-card {
+    margin: 2%;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+h2 {
+    align-self: center;
+}
+
+img {
+    //max-width: 60%;
+    height: 18vw;
+    align-self: center;
+}

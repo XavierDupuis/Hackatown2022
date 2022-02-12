@@ -1,5 +1,5 @@
+import { Product } from '@app/interfaces/product.interface';
 import { ActiveProductService } from '@app/product-service/active-products.service';
-import { Product } from '@app/product-service/product.interface';
 import { ProductService } from '@app/product-service/products.service';
 import { Router } from 'express';
 import { Service } from 'typedi';

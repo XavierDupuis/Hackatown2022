@@ -1,4 +1,7 @@
-import { ACTIVE_PRODUCTS_COLLECTION, BASIC_PRODUCTS, BASIC_SELLER, PRODUCTS_COLLECTION } from '@app/database-service/constants';
+import {
+    ACTIVE_PRODUCTS_COLLECTION, BASIC_ORDERS, BASIC_PRODUCTS,
+    BASIC_SELLER, ORDERS_COLLECTION, PRODUCTS_COLLECTION
+} from '@app/database-service/constants';
 import { SELLER_COLLECTION } from '@app/services/seller.profile.service';
 import { CollectionInfo, Db, MongoClient } from 'mongodb';
 import { Service } from 'typedi';
@@ -21,8 +24,9 @@ export class DatabaseService {
             throw new Error('Database connection error');
         }
 
-        this.createCollection(PRODUCTS_COLLECTION); // TODO create Collections
-        this.createCollection(ACTIVE_PRODUCTS_COLLECTION); // TODO create Collections
+        this.createProductsCollection(PRODUCTS_COLLECTION); // TODO create Collections
+        this.createProductsCollection(ACTIVE_PRODUCTS_COLLECTION);
+        this.createOrdersCollection(ORDERS_COLLECTION);
         this.createSellerCollection();
     }
 
@@ -32,16 +36,15 @@ export class DatabaseService {
         return collection !== undefined;
     }
 
-    private async createCollection(name: string) {
+    private async createProductsCollection(name: string) {
         try {
             const collectionExists = await this.isCollectionInDb(name);
             if (collectionExists) {
                 return;
             }
             await this.db.createCollection(name);
-            // TODO name or _id?
-            await this.db.collection(name).createIndex({ name: 1 }, { unique: true });
-            this.populateCollection(name);
+            await this.db.collection(name).createIndex({ id: 1 });
+            this.populateProductsCollection(name);
         } catch (error) {
             throw Error('Data base collection creation error');
         }
@@ -62,10 +65,10 @@ export class DatabaseService {
         }
     }
 
-    private async populateCollection(name: string): Promise<void> {
+    private async populateProductsCollection(name: string): Promise<void> {
         try {
             if ((await this.db.collection(name).countDocuments()) === 0) {
-                await this.db.collection(name).insertMany(BASIC_PRODUCTS); // TODO add default population
+                await this.db.collection(name).insertMany(BASIC_PRODUCTS);
             }
         } catch (e) {
             throw Error('Data base collection population error');
@@ -79,6 +82,22 @@ export class DatabaseService {
             }
         } catch (e) {
             throw Error('Data base collection population error');
+        }
+    }
+
+    private async createOrdersCollection(name: string) {
+        try {
+            const collectionExists = await this.isCollectionInDb(name);
+            if (collectionExists) {
+                return;
+            }
+            await this.db.createCollection(name);
+            await this.db.collection(name).createIndex({ id: 1 });
+            if ((await this.db.collection(name).countDocuments()) === 0) {
+                await this.db.collection(name).insertMany(BASIC_ORDERS);
+            }
+        } catch (error) {
+            throw Error('Data base collection creation error');
         }
     }
 

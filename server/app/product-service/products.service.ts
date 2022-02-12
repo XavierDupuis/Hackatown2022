@@ -1,6 +1,6 @@
 import { PRODUCTS_COLLECTION } from '@app/database-service/constants';
 import { DatabaseService } from '@app/database-service/database.service';
-import { Product } from '@app/product-service/product.interface';
+import { Product } from '@app/interfaces/product.interface';
 import { Collection } from 'mongodb';
 import { Service } from 'typedi';
 
@@ -17,7 +17,13 @@ export class ProductService {
     }
 
     async addProduct(product: Product): Promise<void> {
-        await this.collection.insertOne({ name: product.name, price: product.price, quantity: product.quantity, sellerId: product.sellerId });
+        await this.collection.insertOne({
+            id: product.id,
+            name: product.name,
+            price: product.price,
+            quantity: product.quantity,
+            sellerId: product.sellerId,
+        });
     }
 
     // TODO: NOT USED FOR NOW

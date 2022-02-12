@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-findmyfood-dev-120146-authRole",
+      "UnauthRoleArn": "arn:aws:iam::594500907854:role/amplify-findmyfood-dev-120146-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::594500907854:role/amplify-findmyfood-dev-120146-authRole",
+      "Region": "ca-central-1",
+      "DeploymentBucketName": "amplify-findmyfood-dev-120146-deployment",
+      "UnauthRoleName": "amplify-findmyfood-dev-120146-unauthRole",
+      "StackName": "amplify-findmyfood-dev-120146",
+      "StackId": "arn:aws:cloudformation:ca-central-1:594500907854:stack/amplify-findmyfood-dev-120146/779959a0-8c25-11ec-9730-0232db3947b0",
+      "AmplifyAppId": "dgj7t8aivxzya"
+    },
+    "categories": {
+      "auth": {
+        "findmyfood2e7111af": {}
+      }
+    }
+  }
+}

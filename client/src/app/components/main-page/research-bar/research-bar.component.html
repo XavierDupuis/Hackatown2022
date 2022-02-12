@@ -1,18 +1,25 @@
-<mat-form-field class="example-chip-list" appearance="fill">
-    <mat-label>Favorite Fruits</mat-label>
-    <mat-chip-list #chipList aria-label="Fruit selection">
-        <mat-chip *ngFor="let option of options" (removed)="remove(option)">
-            {{ option }}
-            <button matChipRemove>
-                <mat-icon>cancel</mat-icon>
-            </button>
-        </mat-chip>
-        <input
-            placeholder="New fruit..."
-            [matChipInputFor]="chipList"
-            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-            [matChipInputAddOnBlur]="addOnBlur"
-            (matChipInputTokenEnd)="add($event)"
-        />
-    </mat-chip-list>
-</mat-form-field>
+<div>
+    <mat-form-field class="input" appearance="fill">
+        <mat-label>Favorite Fruits</mat-label>
+        <mat-chip-list #chipList aria-label="Meal selection">
+            <mat-chip *ngFor="let option of options" (removed)="remove(option)">
+                {{ option }}
+                <button matChipRemove>
+                    <mat-icon>cancel</mat-icon>
+                </button>
+            </mat-chip>
+            <input
+                placeholder="Enter a meal"
+                [matChipInputFor]="chipList"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                [matChipInputAddOnBlur]="addOnBlur"
+                (matChipInputTokenEnd)="add($event)"
+            />
+        </mat-chip-list>
+    </mat-form-field>
+
+    <mat-form-field class="input" appearance="fill">
+        <mat-label>Location</mat-label>
+        <input matInput placeholder="Montreal" value="Montreal" />
+    </mat-form-field>
+</div>

@@ -1,0 +1,6 @@
+<amplify-authenticator>
+    <ng-template amplifySlot="authenticated" let-user="user" let-signOut="signOut">
+        <h1>You are already signed in</h1>
+        <button mat-button (click)="redirect()">Go Shop</button>
+    </ng-template>
+</amplify-authenticator>
