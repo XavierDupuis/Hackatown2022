@@ -21,11 +21,11 @@ export class ProductController {
             try {
                 const products = await this.activeProductService.getProducts();
                 if (products.length === 0) {
-                    res.sendStatus(ERROR);
+                    return res.sendStatus(ERROR);
                 }
-                res.send(products);
+                return res.send(products);
             } catch (e) {
-                res.sendStatus(ERROR);
+                return res.sendStatus(ERROR);
             }
         });
 
@@ -33,11 +33,11 @@ export class ProductController {
             try {
                 const products = await this.productService.getProducts();
                 if (products.length === 0) {
-                    res.sendStatus(ERROR);
+                    return res.sendStatus(ERROR);
                 }
-                res.send(products);
+                return res.send(products);
             } catch (e) {
-                res.sendStatus(ERROR);
+                return res.sendStatus(ERROR);
             }
         });
 
@@ -46,24 +46,22 @@ export class ProductController {
                 const product = req.body as Product;
                 await this.productService.addProduct(product);
                 await this.activeProductService.addProduct(product);
-                res.sendStatus(OK);
+                return res.sendStatus(OK);
             } catch (e) {
-                res.sendStatus(ERROR);
+                return res.sendStatus(ERROR);
             }
         });
 
         this.router.delete('/', async (req, res) => {
             try {
                 const product = req.body as Product;
-                await this.activeProductService.deleteProduct(product);
-                res.sendStatus(OK);
                 const result = await this.activeProductService.deleteProduct(product);
                 if (result) {
-                    res.sendStatus(OK);
+                    return res.sendStatus(OK);
                 }
-                res.sendStatus(ERROR);
+                return res.sendStatus(ERROR);
             } catch (e) {
-                res.sendStatus(ERROR);
+                return res.sendStatus(ERROR);
             }
         });
     }

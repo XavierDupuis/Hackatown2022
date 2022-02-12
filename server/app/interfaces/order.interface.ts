@@ -1,7 +1,6 @@
 import { Product } from '@app/interfaces/product.interface';
 
 export interface Order {
-    id: string;
     userId: string;
     total: number;
     orderedProduct: Product[];

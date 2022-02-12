@@ -18,14 +18,11 @@ export class OrderController {
 
         this.router.get('/', async (req, res) => {
             try {
-                const userId = req.body;
-                const products = await this.orderService.getOrders(userId); // TODO: TO test
-                if (products.length === 0) {
-                    res.sendStatus(ERROR);
-                }
-                res.send(products);
+                const { userId } = req.body;
+                const orders = await this.orderService.getOrders(userId);
+                return res.send(orders);
             } catch (e) {
-                res.sendStatus(ERROR);
+                return res.sendStatus(ERROR);
             }
         });
 
@@ -33,22 +30,19 @@ export class OrderController {
             try {
                 const order = req.body as OrderUI;
                 await this.orderService.createOrder(order);
-                res.sendStatus(OK);
+                return res.sendStatus(OK);
             } catch (e) {
-                res.sendStatus(ERROR);
+                return res.sendStatus(ERROR);
             }
         });
 
         this.router.delete('/', async (req, res) => {
             try {
-                const orderId = req.body;
-                const result = await this.orderService.deleteOrder(orderId);
-                if (result) {
-                    res.sendStatus(OK);
-                }
-                res.sendStatus(ERROR);
+                const { orderId } = req.body;
+                await this.orderService.deleteOrder(orderId);
+                return res.sendStatus(OK);
             } catch (e) {
-                res.sendStatus(ERROR);
+                return res.sendStatus(ERROR);
             }
         });
     }
