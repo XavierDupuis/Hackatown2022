@@ -1,8 +1,10 @@
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 // import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from '@app/app.component';
+import { AuthInterceptor } from '@app/auth/interceptor/auth.interceptor';
 import { HeaderBarComponent } from '@app/components/header-bar/header-bar.component';
 import { MainPageComponent } from '@app/components/main-page/main-page.component';
 import { ProductCardListComponent } from '@app/components/main-page/products/product-card-list/product-card-list.component';
@@ -15,6 +17,7 @@ import { AmplifyAuthenticatorModule } from '@aws-amplify/ui-angular';
 import { Amplify } from 'aws-amplify';
 // eslint-disable-next-line no-restricted-imports
 import awsmobile from '../aws-exports';
+import { AuthPageComponent } from './components/pages/auth-page/auth-page.component';
 
 Amplify.configure(awsmobile);
 
@@ -27,9 +30,16 @@ Amplify.configure(awsmobile);
         ResearchBarComponent,
         ProductCardComponent,
         ProductCardListComponent,
+        AuthPageComponent,
     ],
     imports: [AppMaterialModule, BrowserModule, AppRoutingModule, BrowserAnimationsModule, AmplifyAuthenticatorModule],
-    providers: [],
+    providers: [
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: AuthInterceptor,
+            multi: true,
+        },
+    ],
     bootstrap: [AppComponent],
 })
 export class AppModule {}
