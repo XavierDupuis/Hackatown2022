@@ -1,7 +1,7 @@
 import { HttpException } from '@app/classes/http.exception';
 import { DateController } from '@app/controllers/date.controller';
-import { ExampleController } from '@app/controllers/example.controller';
 import { SellerProfileController } from '@app/controllers/seller.profile.controller';
+import { ProductController } from '@app/controllers/product.controller';
 import * as cookieParser from 'cookie-parser';
 import * as cors from 'cors';
 import * as express from 'express';
@@ -18,9 +18,9 @@ export class Application {
     private readonly swaggerOptions: swaggerJSDoc.Options;
 
     constructor(
-        private readonly exampleController: ExampleController,
-        private readonly dateController: DateController,
+        private readonly productController: ProductController,
         private readonly sellerProfileController: SellerProfileController,
+        private readonly dateController: DateController,
     ) {
         this.app = express();
 
@@ -42,7 +42,7 @@ export class Application {
 
     bindRoutes(): void {
         this.app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerJSDoc(this.swaggerOptions)));
-        this.app.use('/api/example', this.exampleController.router);
+        this.app.use('/api/products', this.productController.router);
         this.app.use('/api/date', this.dateController.router);
         this.app.use('/', (req, res) => {
             res.redirect('/api/docs');
