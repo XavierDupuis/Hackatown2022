@@ -4,7 +4,7 @@
 
 $light-primary-palette: mat.$purple-palette;
 $light-accent-palette: mat.define-palette(mat.$green-palette, A200, A100, A400);
-$light-warn-palette: mat.define-palette(mat.$green-palette, A700, A600, A900);
+$light-warn-palette: mat.define-palette(mat.$red-palette, A700, A600, A900);
 
 $app-light-theme: mat-light-theme($light-primary-palette, $light-accent-palette, $light-warn-palette);
 .light-theme {

@@ -1,9 +1,14 @@
 import { Injectable } from '@angular/core';
+import { ProductAddedToCart } from '@app/components/main-page/products/modal-select-product/modal-select-product/modal-select-product.component';
 
 @Injectable({
-  providedIn: 'root',
+    providedIn: 'root',
 })
 export class CartService {
-  constructor() {}
-  numberOfItemsInCart = 6;
+    selectedProducts: ProductAddedToCart[] = [];
+    constructor() {}
+
+    addProduct(product: ProductAddedToCart) {
+        this.selectedProducts.push(product);
+    }
 }

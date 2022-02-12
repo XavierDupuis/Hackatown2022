@@ -1,0 +1,15 @@
+<h1>{{ productAddedToCart.product.name }}</h1>
+<div mat-dialog-content>
+    <mat-form-field appearance="fill">
+        <mat-label>Desired quantity</mat-label>
+        <input matInput min="1" [max]="productAddedToCart.product.qtyLeft" type="number" [(ngModel)]="productAddedToCart.quantity" />
+    </mat-form-field>
+    <p>
+        Estimated price : {{ productAddedToCart.quantity }}x at {{ productAddedToCart.product.price / 100 | currency }} =
+        {{ (productAddedToCart.product.price * productAddedToCart.quantity) / 100 | currency }}
+    </p>
+</div>
+<div mat-dialog-actions>
+    <button mat-raised-button (click)="onNoClick()">Cancel</button>
+    <button mat-raised-button [disabled]="!isQuantityValid()" [mat-dialog-close]="productAddedToCart" cdkFocusInitial>Confirm</button>
+</div>

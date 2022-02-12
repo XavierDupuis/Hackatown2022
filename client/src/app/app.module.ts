@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-// import { FormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from '@app/app.component';
@@ -11,6 +11,8 @@ import { ResearchBarComponent } from '@app/components/main-page/research-bar/res
 import { ProfilePageComponent } from '@app/components/profile-page/profile-page.component';
 import { AppRoutingModule } from '@app/modules/app-routing.module';
 import { AppMaterialModule } from '@app/modules/material.module';
+import { ModalSelectProductComponent } from './components/main-page/products/modal-select-product/modal-select-product/modal-select-product.component';
+import { CartModalComponent } from './components/main-page/cart/cart-modal/cart-modal.component';
 
 @NgModule({
     declarations: [
@@ -21,8 +23,10 @@ import { AppMaterialModule } from '@app/modules/material.module';
         ResearchBarComponent,
         ProductCardComponent,
         ProductCardListComponent,
+        ModalSelectProductComponent,
+        CartModalComponent,
     ],
-    imports: [AppMaterialModule, BrowserModule, AppRoutingModule, BrowserAnimationsModule],
+    imports: [AppMaterialModule, BrowserModule, AppRoutingModule, BrowserAnimationsModule, FormsModule],
     providers: [],
     bootstrap: [AppComponent],
 })
