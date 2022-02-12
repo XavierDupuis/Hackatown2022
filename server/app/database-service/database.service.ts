@@ -1,4 +1,12 @@
-import { ACTIVE_PRODUCTS_COLLECTION, BASIC_ORDERS, BASIC_PRODUCTS, ORDERS_COLLECTION, PRODUCTS_COLLECTION } from '@app/database-service/constants';
+import {
+    ACTIVE_PRODUCTS_COLLECTION,
+    BASIC_ORDERS,
+    BASIC_PRODUCTS,
+    BASIC_SELLER,
+    ORDERS_COLLECTION,
+    PRODUCTS_COLLECTION
+} from '@app/database-service/constants';
+import { SELLER_COLLECTION } from '@app/sellers/seller-constants';
 import { CollectionInfo, Db, MongoClient } from 'mongodb';
 import { Service } from 'typedi';
 
@@ -23,6 +31,7 @@ export class DatabaseService {
         this.createProductsCollection(PRODUCTS_COLLECTION); // TODO create Collections
         this.createProductsCollection(ACTIVE_PRODUCTS_COLLECTION);
         this.createOrdersCollection(ORDERS_COLLECTION);
+        this.createSellerCollection();
     }
 
     private async isCollectionInDb(name: string): Promise<boolean> {
@@ -44,10 +53,37 @@ export class DatabaseService {
         }
     }
 
+    private async createSellerCollection() {
+        try {
+            const collectionExists = await this.isCollectionInDb(SELLER_COLLECTION);
+            if (collectionExists) {
+                return;
+            }
+            await this.db.createCollection(SELLER_COLLECTION);
+            // TODO index?
+            await this.db.collection(SELLER_COLLECTION);
+            this.populateSellerCollection();
+        } catch (error) {
+            // console.error();
+            throw Error('Data base collection creation error');
+        }
+    }
+
     private async populateProductsCollection(name: string): Promise<void> {
         try {
             if ((await this.db.collection(name).countDocuments()) === 0) {
                 await this.db.collection(name).insertMany(BASIC_PRODUCTS);
+            }
+        } catch (e) {
+            throw Error('Data base collection population error');
+        }
+    }
+
+    private async populateSellerCollection() {
+        try {
+            const documentCounts = await this.db.collection(SELLER_COLLECTION).countDocuments();
+            if (documentCounts === 0) {
+                await this.db.collection(SELLER_COLLECTION).insertMany(BASIC_SELLER); // TODO add default population
             }
         } catch (e) {
             throw Error('Data base collection population error');

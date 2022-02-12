@@ -6,4 +6,5 @@ export const BASIC_ORDERS = [
 // Collection names
 export const PRODUCTS_COLLECTION = 'Products_History';
 export const ACTIVE_PRODUCTS_COLLECTION = 'Active_Products';
+export const BASIC_SELLER = [{ name: 'Seller1', description: 'Seller1 description', imageUrl: 'Seller1 imageUrl', reviews: [] }];
 export const ORDERS_COLLECTION = 'Orders';
