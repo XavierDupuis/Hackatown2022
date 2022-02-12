@@ -17,7 +17,7 @@ export class ProductService {
     }
 
     async addProduct(product: Product): Promise<void> {
-        await this.collection.insertOne({ name: product.name, price: product.price, quantity: product.quantity });
+        await this.collection.insertOne({ id: product.id, name: product.name, price: product.price, quantity: product.quantity });
     }
 
     // TODO: NOT USED FOR NOW
