@@ -3,6 +3,7 @@ import { Request, Response, Router } from 'express';
 import { Service } from 'typedi';
 
 const ERROR = 400;
+const OK = 200;
 // TODO Check for request auth
 
 @Service()
@@ -30,7 +31,7 @@ export class SellerProfileController {
         this.router.post('/create', async (req, res) => {
             const { name, description } = req.body;
             if (name === undefined || description === undefined) {
-                return res.sendStatus(400);
+                return res.sendStatus(ERROR);
             }
 
             try {
@@ -40,7 +41,7 @@ export class SellerProfileController {
                     userId: 'allo',
                 };
                 await this.sellerProfileService.createProfile(params);
-                return res.sendStatus(200);
+                return res.sendStatus(OK);
             } catch (e) {
                 return res.sendStatus(ERROR);
             }
