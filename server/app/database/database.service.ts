@@ -1,12 +1,12 @@
 import { CollectionInfo, Db, MongoClient } from 'mongodb';
 import { Service } from 'typedi';
 
-// const DB_USER = 'server';
-// const DB_PSW = 'ACyZhkpcAUT812QB';
-// const CLUSTER_URL = 'scrabblecluster.mqtnr.mongodb.net';
+const DB_USER = 'olivier';
+const DB_PSW = '8yZ7udaWMcrr7MS';
+// const CLUSTER_URL = 'cluster0.mqtnr.mongodb.net';
 
-export const DATABASE_URL = '';
-export const DATABASE_NAME = '';
+export const DATABASE_URL = `mongodb+srv://${DB_USER}:${DB_PSW}@cluster0.nbg4o.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
+export const DATABASE_NAME = 'FindMyFood';
 
 @Service()
 export class DatabaseService {
@@ -16,11 +16,11 @@ export class DatabaseService {
         try {
             const client = await MongoClient.connect(url);
             this.db = client.db(DATABASE_NAME);
-        } catch {
+        } catch (e) {
             throw new Error('Database connection error');
         }
 
-        this.createCollection('name'); // TODO create Collections
+        this.createCollection('Product'); // TODO create Collections
     }
 
     private async isCollectionInDb(name: string): Promise<boolean> {
