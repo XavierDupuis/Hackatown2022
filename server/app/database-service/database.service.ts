@@ -38,17 +38,17 @@ export class DatabaseService {
                 return;
             }
             await this.db.createCollection(name);
-            await this.db.collection(name).createIndex({ name: 1 });
-            this.populateCollection(name);
+            await this.db.collection(name).createIndex({ id: 1 });
+            this.populateProductsCollection(name);
         } catch (error) {
             throw Error('Data base collection creation error');
         }
     }
 
-    private async populateCollection(name: string): Promise<void> {
+    private async populateProductsCollection(name: string): Promise<void> {
         try {
             if ((await this.db.collection(name).countDocuments()) === 0) {
-                await this.db.collection(name).insertMany(BASIC_PRODUCTS); // TODO add default population
+                await this.db.collection(name).insertMany(BASIC_PRODUCTS);
             }
         } catch (e) {
             throw Error('Data base collection population error');
@@ -62,9 +62,9 @@ export class DatabaseService {
                 return;
             }
             await this.db.createCollection(name);
-            await this.db.collection(name).createIndex({ name: 1 });
+            await this.db.collection(name).createIndex({ id: 1 });
             if ((await this.db.collection(name).countDocuments()) === 0) {
-                await this.db.collection(name).insertMany(BASIC_ORDERS); // TODO add default population
+                await this.db.collection(name).insertMany(BASIC_ORDERS);
             }
         } catch (error) {
             throw Error('Data base collection creation error');
