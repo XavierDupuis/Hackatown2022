@@ -7,6 +7,5 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
     title = 'AppTitle/Logo';
-    theme = 'light-theme';
     constructor() {}
 }
