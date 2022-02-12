@@ -13,3 +13,5 @@ coverage/
 
 #Old
 /old
+
+server/app/environments/
