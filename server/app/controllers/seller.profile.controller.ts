@@ -1,9 +1,8 @@
 import { SellerProfileService } from '@app/services/seller.profile.service';
 import { Request, Response, Router } from 'express';
-import { StatusCodes } from 'http-status-codes';
 import { Service } from 'typedi';
 
-// const HTTP_STATUS_CREATED = 201;
+const ERROR = 400;
 // TODO Check for request auth
 
 @Service()
@@ -22,7 +21,7 @@ export class SellerProfileController {
                 const fullName = await this.sellerProfileService.getFullName(req.params.id);
                 res.json(fullName);
             } catch (e) {
-                res.sendStatus(StatusCodes.NOT_FOUND);
+                res.sendStatus(ERROR);
             }
         });
 
@@ -31,7 +30,7 @@ export class SellerProfileController {
                 const description = await this.sellerProfileService.getDescription(req.params.id);
                 res.json(description);
             } catch (e) {
-                res.sendStatus(StatusCodes.NOT_FOUND);
+                res.sendStatus(ERROR);
             }
         });
 
@@ -40,7 +39,7 @@ export class SellerProfileController {
                 const productList = await this.sellerProfileService.getProducts(req.params.id);
                 res.json(productList);
             } catch (e) {
-                res.sendStatus(StatusCodes.NOT_FOUND);
+                res.sendStatus(ERROR);
             }
         });
 
@@ -49,7 +48,7 @@ export class SellerProfileController {
                 const historyList = await this.sellerProfileService.getHistory(req.params.id);
                 res.json(historyList);
             } catch (e) {
-                res.sendStatus(StatusCodes.NOT_FOUND);
+                res.sendStatus(ERROR);
             }
         });
 
@@ -58,7 +57,7 @@ export class SellerProfileController {
                 const imageUrl = await this.sellerProfileService.getImageUrl(req.params.id);
                 res.json(imageUrl);
             } catch (e) {
-                res.sendStatus(StatusCodes.NOT_FOUND);
+                res.sendStatus(ERROR);
             }
         });
 
@@ -68,7 +67,7 @@ export class SellerProfileController {
                 const reviewList = await this.sellerProfileService.getReviews(req.params.id);
                 res.json(reviewList);
             } catch (e) {
-                res.sendStatus(StatusCodes.NOT_FOUND);
+                res.sendStatus(ERROR);
             }
         });
 
@@ -84,7 +83,7 @@ export class SellerProfileController {
                 const review = req.body;
                 await this.sellerProfileService.addReview(review);
             } catch (e) {
-                res.sendStatus(StatusCodes.NOT_FOUND);
+                res.sendStatus(ERROR);
             }
         });
 

@@ -1,13 +1,9 @@
-import { Product } from '@app/product-service/product.interface';
-
 export interface SellerProfile {
     _id: string;
-    reviews: Review[];
-    availableProducts: Product[];
     name: string;
     description: string;
-    productsHistory: Product[];
     imageUrl: string;
+    reviews: Review[];
 }
 
 export interface Review {
@@ -16,7 +12,3 @@ export interface Review {
     title: string;
     review: string;
 }
-
-// export interface Product {
-
-// }

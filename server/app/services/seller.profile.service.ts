@@ -8,7 +8,7 @@ import { Service } from 'typedi';
 
 // TODO Check for request auth
 
-const SELLER_COLLECTION = 'sellerProfile';
+export const SELLER_COLLECTION = 'sellerProfile';
 @Service()
 export class SellerProfileService {
     clientMessages: Message[];
