@@ -7,4 +7,19 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
     title = 'client';
+    constructor() {
+    }
+
+    // private a() {
+
+    // }
+
+    b() 
+    {
+
+    }
+
+    // private c() {
+        
+    // }
 }
