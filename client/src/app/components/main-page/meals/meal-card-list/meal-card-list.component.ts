@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./meal-card-list.component.scss'],
 })
 export class MealCardListComponent implements OnInit {
+    meals = [0, 1, 2, 3, 4, 5];
+
     constructor() {}
 
     ngOnInit(): void {}
