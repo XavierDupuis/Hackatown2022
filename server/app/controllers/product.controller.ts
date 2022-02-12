@@ -57,6 +57,11 @@ export class ProductController {
                 const product = req.body as Product;
                 await this.activeProductService.deleteProduct(product);
                 res.sendStatus(OK);
+                const result = await this.activeProductService.deleteProduct(product);
+                if (result) {
+                    res.sendStatus(OK);
+                }
+                res.sendStatus(ERROR);
             } catch (e) {
                 res.sendStatus(ERROR);
             }
