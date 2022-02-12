@@ -1,9 +1,9 @@
+import { ACTIVE_PRODUCTS_COLLECTION, BASIC_PRODUCTS, PRODUCTS_COLLECTION } from '@app/database-service/constants';
 import { CollectionInfo, Db, MongoClient } from 'mongodb';
 import { Service } from 'typedi';
 
 const DB_USER = 'olivier';
 const DB_PSW = '8yZ7udaWMcrr7MS';
-// const CLUSTER_URL = 'cluster0.mqtnr.mongodb.net';
 
 export const DATABASE_URL = `mongodb+srv://${DB_USER}:${DB_PSW}@cluster0.nbg4o.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
 export const DATABASE_NAME = 'FindMyFood';
@@ -20,7 +20,8 @@ export class DatabaseService {
             throw new Error('Database connection error');
         }
 
-        this.createCollection('Product'); // TODO create Collections
+        this.createCollection(PRODUCTS_COLLECTION); // TODO create Collections
+        this.createCollection(ACTIVE_PRODUCTS_COLLECTION); // TODO create Collections
     }
 
     private async isCollectionInDb(name: string): Promise<boolean> {
@@ -46,7 +47,7 @@ export class DatabaseService {
     private async populateCollection(name: string): Promise<void> {
         try {
             if ((await this.db.collection(name).countDocuments()) === 0) {
-                // await this.db.collection(name).insertMany(); // TODO add default population
+                await this.db.collection(name).insertMany(BASIC_PRODUCTS); // TODO add default population
             }
         } catch (e) {
             throw Error('Data base collection population error');

@@ -1,5 +1,5 @@
 import { Application } from '@app/app';
-import { DatabaseService } from '@app/database/database.service';
+import { DatabaseService } from '@app/database-service/database.service';
 import * as http from 'http';
 import { AddressInfo } from 'net';
 import { Service } from 'typedi';
