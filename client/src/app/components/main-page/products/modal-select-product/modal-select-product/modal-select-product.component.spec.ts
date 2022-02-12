@@ -1,18 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ProductCardComponent } from '@app/components/main-page/products/product-card/product-card.component';
 
-describe('ProductCardComponent', () => {
-    let component: ProductCardComponent;
-    let fixture: ComponentFixture<ProductCardComponent>;
+import { ModalSelectProductComponent } from './modal-select-product.component';
+
+describe('ModalSelectProductComponent', () => {
+    let component: ModalSelectProductComponent;
+    let fixture: ComponentFixture<ModalSelectProductComponent>;
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [ProductCardComponent],
+            declarations: [ModalSelectProductComponent],
         }).compileComponents();
     });
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(ProductCardComponent);
+        fixture = TestBed.createComponent(ModalSelectProductComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

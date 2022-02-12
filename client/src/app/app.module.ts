@@ -1,6 +1,6 @@
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-// import { FormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from '@app/app.component';
@@ -17,6 +17,9 @@ import { AmplifyAuthenticatorModule } from '@aws-amplify/ui-angular';
 import { Amplify } from 'aws-amplify';
 // eslint-disable-next-line no-restricted-imports
 import awsmobile from '../aws-exports';
+import { CartModalComponent } from './components/main-page/cart/cart-modal/cart-modal.component';
+// eslint-disable-next-line max-len
+import { ModalSelectProductComponent } from './components/main-page/products/modal-select-product/modal-select-product/modal-select-product.component';
 import { AuthPageComponent } from './components/pages/auth-page/auth-page.component';
 
 Amplify.configure(awsmobile);
@@ -31,8 +34,10 @@ Amplify.configure(awsmobile);
         ProductCardComponent,
         ProductCardListComponent,
         AuthPageComponent,
+        ModalSelectProductComponent,
+        CartModalComponent,
     ],
-    imports: [AppMaterialModule, BrowserModule, AppRoutingModule, BrowserAnimationsModule, AmplifyAuthenticatorModule],
+    imports: [AppMaterialModule, BrowserModule, AppRoutingModule, BrowserAnimationsModule, AmplifyAuthenticatorModule, FormsModule],
     providers: [
         {
             provide: HTTP_INTERCEPTORS,
