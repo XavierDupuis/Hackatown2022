@@ -1,7 +1,8 @@
 export interface Product {
     name: string;
     description: string;
-    qtyLeft: number;
+    quantityInitial: number;
+    quantityLeft: number;
     price: number;
     imageURL: string;
     maxPickupDate: Date;

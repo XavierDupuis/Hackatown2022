@@ -2,7 +2,7 @@
 <div mat-dialog-content>
     <mat-form-field appearance="fill">
         <mat-label>Desired quantity</mat-label>
-        <input matInput min="1" [max]="productAddedToCart.product.qtyLeft" type="number" [(ngModel)]="productAddedToCart.quantity" />
+        <input matInput min="1" [max]="productAddedToCart.product.quantityLeft" type="number" [(ngModel)]="productAddedToCart.quantity" />
     </mat-form-field>
     <p>
         Estimated price : {{ productAddedToCart.quantity }}x at {{ productAddedToCart.product.price / 100 | currency }} =
