@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ProductAddedToCart } from '@app/components/main-page/products/modal-select-product/modal-select-product/modal-select-product.component';
 import { CartService } from '@app/services/cart-service/cart.service';
 
@@ -7,38 +7,13 @@ import { CartService } from '@app/services/cart-service/cart.service';
     templateUrl: './cart-modal.component.html',
     styleUrls: ['./cart-modal.component.scss'],
 })
-export class CartModalComponent implements OnInit {
-    displayedColumns: string[];
-    columns = [
-        {
-            columnDef: 'name',
-            header: 'Name',
-            footer: 'Total',
-            cell: (cartProduct: ProductAddedToCart) => `${cartProduct.product.name}`,
-        },
-        {
-            columnDef: 'price',
-            header: 'Unit Price',
-            cell: (cartProduct: ProductAddedToCart) => `${cartProduct.product.price}`,
-        },
-        {
-            columnDef: 'quantity',
-            header: 'Quantity',
-            cell: (cartProduct: ProductAddedToCart) => `${cartProduct.quantity}`,
-        },
-        {
-            columnDef: 'subtotal',
-            header: 'Sub Total',
-            cell: (cartProduct: ProductAddedToCart) => `${(cartProduct.quantity * cartProduct.product.price) / 100}`,
-        },
-    ];
+export class CartModalComponent {
+    displayedColumns = ['name', 'price', 'quantity', 'subtotal', 'remove'];
 
-    constructor(private cartService: CartService) {
-        this.displayedColumns = this.columns.map((c) => c.columnDef);
-    }
+    constructor(private cartService: CartService) {}
 
     get cartProducts() {
-        return this.cartService.selectedProducts;
+        return this.cartService.selectedProductsSubject;
     }
 
     areThereProductsInCart() {
@@ -46,8 +21,13 @@ export class CartModalComponent implements OnInit {
     }
 
     get totalCost() {
-        return this.cartProducts.map((p) => [p.quantity, p.product.price]).reduce((acc, [q, p]) => acc + q * p, 0) / 100;
+        return this.cartProducts
+            .getValue()
+            .map((p) => [p.quantity, p.product.price])
+            .reduce((acc, [q, p]) => acc + q * p, 0);
     }
 
-    ngOnInit(): void {}
+    removeProductFromCart(product: ProductAddedToCart) {
+        this.cartService.removeProduct(product);
+    }
 }

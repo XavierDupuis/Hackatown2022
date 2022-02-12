@@ -22,6 +22,7 @@ export class HeaderBarComponent implements OnInit {
     openCart() {
         this.dialog.open(CartModalComponent, {
             width: '80%',
+            height: '60%',
         });
     }
 }
