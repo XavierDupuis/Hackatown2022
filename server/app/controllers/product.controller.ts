@@ -44,6 +44,7 @@ export class ProductController {
         this.router.post('/', async (req, res) => {
             try {
                 const product = req.body as Product;
+
                 await this.productService.addProduct(product);
                 await this.activeProductService.addProduct(product);
                 return res.sendStatus(OK);
@@ -54,8 +55,8 @@ export class ProductController {
 
         this.router.delete('/', async (req, res) => {
             try {
-                const product = req.body as Product;
-                const result = await this.activeProductService.deleteProduct(product);
+                const { productId } = req.body;
+                const result = await this.activeProductService.deleteProduct(productId);
                 if (result) {
                     return res.sendStatus(OK);
                 }
