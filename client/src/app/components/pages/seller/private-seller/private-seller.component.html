@@ -1,1 +1,2 @@
-<p>private-seller works!</p>
+<app-new-seller *ngIf="!hasSellerAccount"></app-new-seller>
+<div *ngIf="hasSellerAccount">Private account</div>

@@ -10,13 +10,12 @@ import { environment } from 'src/environments/environment';
 })
 export class SellerIdentityService {
     userSellerIdentity = new BehaviorSubject<SellerIdentity | undefined>(undefined);
-    currentSeller = new BehaviorSubject<Seller | undefined>(undefined);
 
     constructor(private http: HttpClient) {
-        this.refresh();
+        this.refreshIndentity();
     }
 
-    refresh() {
+    refreshIndentity() {
         this.http.get(`${environment.serverURL}/sellers/me`).subscribe(
             (res) => {
                 if (res === null) {
@@ -26,22 +25,6 @@ export class SellerIdentityService {
                 const seller = res as Seller;
                 const identity = seller._id !== undefined ? { id: seller._id } : undefined;
                 this.userSellerIdentity.next(identity);
-            },
-            () => {
-                console.log('Error getting seller identity');
-            },
-        );
-    }
-
-    getSeller(sellerId: string) {
-        this.http.get(`${environment.serverURL}/sellers/${sellerId}`).subscribe(
-            (res) => {
-                if (res === null) {
-                    this.userSellerIdentity.next(undefined);
-                    return;
-                }
-                const seller = res as Seller;
-                this.currentSeller.next(seller);
             },
             () => {
                 console.log('Error getting seller identity');

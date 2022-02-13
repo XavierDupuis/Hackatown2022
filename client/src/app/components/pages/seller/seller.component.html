@@ -1,2 +1,3 @@
-<p>seller works!</p>
+<app-private-seller *ngIf="isUserSellerPage"></app-private-seller>
+<app-public-seller *ngIf="!isUserSellerPage"></app-public-seller>
 <button mat-button (click)="test()">Test user seller id</button>

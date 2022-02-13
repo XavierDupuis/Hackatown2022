@@ -1,12 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { SellerIdentityService } from '@app/auth/services/seller-identity.service';
 
 @Component({
     selector: 'app-private-seller',
     templateUrl: './private-seller.component.html',
     styleUrls: ['./private-seller.component.scss'],
 })
-export class PrivateSellerComponent implements OnInit {
-    constructor() {}
+export class PrivateSellerComponent {
+    constructor(private sellerIdentity: SellerIdentityService) {}
 
-    ngOnInit(): void {}
+    get hasSellerAccount() {
+        return this.sellerIdentity.userSellerIdentity.getValue();
+    }
 }
