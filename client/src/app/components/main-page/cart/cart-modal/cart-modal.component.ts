@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ProductAddedToCart } from '@app/components/main-page/products/modal-select-product/modal-select-product/modal-select-product.component';
+import { ProductAddedToCart } from '@app/interfaces/product.interface';
 import { CartService } from '@app/services/cart-service/cart.service';
 
 @Component({
@@ -29,5 +29,9 @@ export class CartModalComponent {
 
     removeProductFromCart(product: ProductAddedToCart) {
         this.cartService.removeProduct(product);
+    }
+
+    confirmOrder() {
+        this.cartService.addOrder(this.cartProducts.value, this.totalCost);
     }
 }

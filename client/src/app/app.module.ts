@@ -13,6 +13,7 @@ import { ResearchBarComponent } from '@app/components/main-page/research-bar/res
 import { ProfilePageComponent } from '@app/components/profile-page/profile-page.component';
 import { AppRoutingModule } from '@app/modules/app-routing.module';
 import { AppMaterialModule } from '@app/modules/material.module';
+import { PhonePipe } from '@app/pipes/phone-pipe/phone.pipe';
 import { AmplifyAuthenticatorModule } from '@aws-amplify/ui-angular';
 import { Amplify } from 'aws-amplify';
 // eslint-disable-next-line no-restricted-imports
@@ -43,6 +44,7 @@ Amplify.configure(awsmobile);
         ModalSelectProductComponent,
         CartModalComponent,
         NewProductComponent,
+        PhonePipe,
         NewSellerPageComponent,
         SellerComponent,
         PrivateSellerComponent,

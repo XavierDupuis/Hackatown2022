@@ -11,7 +11,6 @@ export interface ProductUI {
     maxPickupDate: Date;
     productionDate: Date;
 }
-
 export interface Product extends ProductUI {
     sellerId: string;
 }

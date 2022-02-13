@@ -1,2 +1,15 @@
-<p>profile-page works!</p>
-<button mat-button (click)="signOut()">SignOut</button>
+<div>
+    <!-- <img src="https://hips.hearstapps.com/hmg-prod/images/homemade-spaghetti-sauce-horizontal-1530890913.jpg" alt="my face" /> -->
+</div>
+<div>
+    <div>{{ user.name }}</div>
+    <div>{{ user.family_name }}</div>
+    <div>{{ user.email }}</div>
+    <div>{{ user.phone_number | phone }}</div>
+</div>
+
+<div *ngFor="let order of orders">
+    <h1>{{ order.total }}</h1>
+</div>
+
+<button mat-raised-button (click)="signOut()">SignOut</button>
