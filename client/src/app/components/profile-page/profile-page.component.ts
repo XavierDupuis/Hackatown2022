@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import { HttpClient } from '@angular/common/http';
 import { AfterViewInit, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '@app/auth/services/auth.service';
-import { environment } from 'src/environments/environment';
+import { Order } from '@app/interfaces/order.interface';
+import { ProfileService } from '@app/services/profile-service/profile.service';
 
 interface AuthUser {
     email: string;
@@ -30,20 +30,23 @@ export class ProfilePageComponent implements AfterViewInit {
         phone_number_verified: true,
         sub: 'string',
     };
-    constructor(private authService: AuthService, private router: Router, private http: HttpClient) {}
+    orders: Order[];
+    constructor(private authService: AuthService, private router: Router, private profileService: ProfileService) {}
 
     ngAfterViewInit(): void {
         this.getUser();
+
+        this.profileService.requestOrdersList().subscribe((result) => {
+            const newOrders = result as Order[];
+            this.orders = newOrders;
+        });
+
     }
 
     async getUser() {
         this.authService.getUserInfo().then((result) => {
             this.user = result.attributes;
         });
-    }
-
-    requestOrdersList() {
-        return this.http.get(`${environment.serverURL}/orders`);
     }
 
     signOut() {

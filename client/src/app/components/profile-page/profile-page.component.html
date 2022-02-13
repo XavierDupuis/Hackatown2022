@@ -8,4 +8,8 @@
     <div>{{ user.phone_number | phone }}</div>
 </div>
 
+<div *ngFor="let order of orders">
+    <h1>{{ order.total }}</h1>
+</div>
+
 <button mat-raised-button (click)="signOut()">SignOut</button>
