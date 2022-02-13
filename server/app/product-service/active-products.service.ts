@@ -1,7 +1,7 @@
 import { ACTIVE_PRODUCTS_COLLECTION } from '@app/database-service/constants';
 import { DatabaseService } from '@app/database-service/database.service';
 import { Product } from '@app/interfaces/product.interface';
-import { Collection } from 'mongodb';
+import { Collection, ObjectId } from 'mongodb';
 import { Service } from 'typedi';
 
 @Service()
@@ -29,11 +29,17 @@ export class ActiveProductService {
         });
     }
 
-    async deleteProduct(product: Product): Promise<boolean> {
-        const result = this.collection.deleteOne(product);
+    async deleteProduct(productId: ObjectId): Promise<boolean> {
+        const result = this.collection.deleteOne({ _id: productId });
         return (await result).deletedCount === 1;
     }
 
-    // TODO: ADD FIELD SEARCH
-    // async getProduct(): Promise<Product> {}
+    async updateProductQty(productId: ObjectId, newQuantity: number): Promise<void> {
+        await this.collection.updateOne({ _id: productId }, { $set: { quantityLeft: newQuantity } });
+    }
+
+    async getProduct(productId: ObjectId): Promise<Product | null> {
+        const product = this.collection.findOne({ _id: productId });
+        return await product;
+    }
 }
