@@ -3,8 +3,8 @@ import {
     BASIC_ORDERS,
     BASIC_PRODUCTS,
     BASIC_SELLER,
+    INACTIVE_PRODUCTS_COLLECTION,
     ORDERS_COLLECTION,
-    PRODUCTS_COLLECTION
 } from '@app/database-service/constants';
 import { SELLER_COLLECTION } from '@app/sellers/seller-constants';
 import { CollectionInfo, Db, MongoClient } from 'mongodb';
@@ -28,7 +28,7 @@ export class DatabaseService {
             throw new Error('Database connection error');
         }
 
-        this.createProductsCollection(PRODUCTS_COLLECTION); // TODO create Collections
+        this.createProductsCollection(INACTIVE_PRODUCTS_COLLECTION); // TODO create Collections
         this.createProductsCollection(ACTIVE_PRODUCTS_COLLECTION);
         this.createOrdersCollection(ORDERS_COLLECTION);
         this.createSellerCollection();

@@ -1,19 +1,19 @@
-import { ACTIVE_PRODUCTS_COLLECTION } from '@app/database-service/constants';
+import { INACTIVE_PRODUCTS_COLLECTION } from '@app/database-service/constants';
 import { DatabaseService } from '@app/database-service/database.service';
 import { Product, ProductUI } from '@app/interfaces/product.interface';
 import { Collection, ObjectId } from 'mongodb';
 import { Service } from 'typedi';
 
 @Service()
-export class ActiveProductService {
+export class InactiveProductsService {
     constructor(private dbService: DatabaseService) {}
 
     get collection(): Collection<Product> {
-        return this.dbService.database.collection(ACTIVE_PRODUCTS_COLLECTION);
+        return this.dbService.database.collection(INACTIVE_PRODUCTS_COLLECTION);
     }
 
     async getProducts(): Promise<Product[]> {
-        return await this.collection.find().toArray();
+        return await this.collection.find({}, {}).toArray();
     }
 
     async getProductsFromSeller(sellerId: string): Promise<Product[]> {
@@ -34,17 +34,13 @@ export class ActiveProductService {
         });
     }
 
+    // TODO: NOT USED FOR NOW
     async deleteProduct(productId: ObjectId): Promise<boolean> {
         const result = this.collection.deleteOne({ _id: productId });
         return (await result).deletedCount === 1;
     }
 
-    async updateProductQty(productId: ObjectId, newQuantity: number): Promise<void> {
-        await this.collection.updateOne({ _id: productId }, { $set: { quantityLeft: newQuantity } });
-    }
-
-    async getProduct(productId: ObjectId): Promise<Product | null> {
-        const product = this.collection.findOne({ _id: productId });
-        return await product;
+    async setInactiveProduct(productId: ObjectId): Promise<void> {
+        await this.collection.updateOne({ _id: productId }, { $set: { quantityLeft: 0 } });
     }
 }

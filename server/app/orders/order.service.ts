@@ -21,11 +21,11 @@ export class OrderService {
         return await this.collection.find({ userId }).toArray();
     }
 
-    async createOrder(order: OrderUI): Promise<void> {
+    async createOrder(order: OrderUI, userId: string): Promise<void> {
         await this.collection.insertOne({
-            userId: order.userId,
+            userId: userId,
             total: order.total,
-            orderedProduct: order.orderedProduct,
+            orderedProducts: order.orderedProducts,
             date: new Date(),
         });
     }

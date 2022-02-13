@@ -1,4 +1,7 @@
-export interface Product {
+import { ObjectId } from 'mongodb';
+
+export interface ProductUI {
+    id?: ObjectId;
     name: string;
     description: string;
     quantityInitial: number;
@@ -7,4 +10,8 @@ export interface Product {
     imageURL: string;
     maxPickupDate: Date;
     productionDate: Date;
+}
+
+export interface Product extends ProductUI {
+    sellerId: string;
 }

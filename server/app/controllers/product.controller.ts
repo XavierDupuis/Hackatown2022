@@ -1,7 +1,6 @@
-import { Product } from '@app/interfaces/product.interface';
 import { ActiveProductService } from '@app/product-service/active-products.service';
-import { ProductService } from '@app/product-service/products.service';
 import { Router } from 'express';
+import { ObjectId } from 'mongodb';
 import { Service } from 'typedi';
 
 const ERROR = 400;
@@ -10,7 +9,7 @@ const OK = 200;
 export class ProductController {
     router: Router;
 
-    constructor(private productService: ProductService, private activeProductService: ActiveProductService) {
+    constructor(private activeProductService: ActiveProductService) {
         this.configureRouter();
     }
 
@@ -20,33 +19,7 @@ export class ProductController {
         this.router.get('/', async (req, res) => {
             try {
                 const products = await this.activeProductService.getProducts();
-                if (products.length === 0) {
-                    return res.sendStatus(ERROR);
-                }
                 return res.send(products);
-            } catch (e) {
-                return res.sendStatus(ERROR);
-            }
-        });
-
-        this.router.get('/history', async (req, res) => {
-            try {
-                const products = await this.productService.getProducts();
-                if (products.length === 0) {
-                    return res.sendStatus(ERROR);
-                }
-                return res.send(products);
-            } catch (e) {
-                return res.sendStatus(ERROR);
-            }
-        });
-
-        this.router.post('/', async (req, res) => {
-            try {
-                const product = req.body as Product;
-                await this.productService.addProduct(product);
-                await this.activeProductService.addProduct(product);
-                return res.sendStatus(OK);
             } catch (e) {
                 return res.sendStatus(ERROR);
             }
@@ -54,8 +27,8 @@ export class ProductController {
 
         this.router.delete('/', async (req, res) => {
             try {
-                const product = req.body as Product;
-                const result = await this.activeProductService.deleteProduct(product);
+                const { productId } = req.body;
+                const result = await this.activeProductService.deleteProduct(new ObjectId(productId));
                 if (result) {
                     return res.sendStatus(OK);
                 }

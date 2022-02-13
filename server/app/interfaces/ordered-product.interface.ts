@@ -1,6 +1,5 @@
-import { Product } from '@app/interfaces/product.interface';
-
-export interface OrderedProduct {
+export interface OrderedProducts {
     pickUpDate: Date;
-    product: Product;
+    productId: string;
+    quantity: number;
 }

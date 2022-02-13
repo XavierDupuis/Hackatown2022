@@ -1,4 +1,5 @@
 import { OrderUI } from '@app/interfaces/order.interface';
+import { OrderHandler } from '@app/orders/order-handler';
 import { OrderService } from '@app/orders/order.service';
 import { Router } from 'express';
 import { Service } from 'typedi';
@@ -9,7 +10,7 @@ const OK = 200;
 export class OrderController {
     router: Router;
 
-    constructor(private orderService: OrderService) {
+    constructor(private orderService: OrderService, private orderHandler: OrderHandler) {
         this.configureRouter();
     }
 
@@ -18,7 +19,7 @@ export class OrderController {
 
         this.router.get('/', async (req, res) => {
             try {
-                const { userId } = req.body;
+                const { userId } = res.locals;
                 const orders = await this.orderService.getOrders(userId);
                 return res.send(orders);
             } catch (e) {
@@ -28,9 +29,13 @@ export class OrderController {
 
         this.router.post('/', async (req, res) => {
             try {
+                const { userId } = res.locals;
                 const order = req.body as OrderUI;
-                await this.orderService.createOrder(order);
-                return res.sendStatus(OK);
+                const result = await this.orderHandler.createOrder(order, userId);
+                if (result) {
+                    return res.sendStatus(OK);
+                }
+                return res.sendStatus(ERROR);
             } catch (e) {
                 return res.sendStatus(ERROR);
             }
