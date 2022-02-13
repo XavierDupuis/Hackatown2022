@@ -1,77 +1,82 @@
-<mat-card>
-    <mat-stepper orientation="vertical" #stepper>
-        <mat-step [stepControl]="nameAndDescription">
-            <form [formGroup]="nameAndDescription">
-                <ng-template matStepLabel>Meal Name, Description and Image</ng-template>
-                <mat-form-field appearance="fill">
-                    <mat-label>Name</mat-label>
-                    <input matInput formControlName="name" required />
-                </mat-form-field>
-                <mat-form-field appearance="fill">
-                    <mat-label>Description</mat-label>
-                    <input matInput formControlName="description" required />
-                </mat-form-field>
-                <mat-form-field appearance="fill">
-                    <mat-label>Image Link</mat-label>
-                    <input matInput formControlName="imageLink" required />
-                </mat-form-field>
-                <div>
-                    <button mat-button matStepperNext>Next</button>
-                </div>
-            </form>
-        </mat-step>
-        <mat-step [stepControl]="quantityAndPrice">
-            <form [formGroup]="quantityAndPrice">
-                <ng-template matStepLabel>Servings and Price</ng-template>
-                <mat-form-field appearance="fill">
-                    <mat-label>Number of Servings</mat-label>
-                    <input matInput formControlName="quantity" required />
-                </mat-form-field>
-                <mat-form-field appearance="fill">
-                    <mat-label>Price per serving ($)</mat-label>
-                    <input matInput formControlName="price" required />
-                </mat-form-field>
-                <div>
-                    <button mat-button matStepperNext>Next</button>
-                </div>
-            </form>
-        </mat-step>
-        <mat-step [stepControl]="dates">
-            <form [formGroup]="dates">
-                <ng-template matStepLabel>Servings and Price</ng-template>
-                <mat-form-field appearance="fill">
-                    <mat-label>Cooking Date</mat-label>
-                    <input matInput [matDatepicker]="picker1" formControlName="productionDate" required />
-                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                    <mat-datepicker #picker1></mat-datepicker>
-                </mat-form-field>
-                <mat-form-field appearance="fill">
-                    <mat-label>Last Date to pickup</mat-label>
-                    <input matInput [matDatepicker]="picker2" formControlName="maxPickupDate" required />
-                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-                    <mat-datepicker #picker2></mat-datepicker>
-                </mat-form-field>
-                <div>
-                    <button mat-button matStepperNext>Next</button>
-                </div>
-            </form>
-        </mat-step>
-        <mat-step>
-            <ng-template matStepLabel>Done!</ng-template>
-            <div>
-                <button mat-raised-button (click)="stepper.reset()">Cancel</button>
-                <button mat-raised-button (click)="addProduct()" [disabled]="!isFormValid">Confirm</button>
-            </div>
-        </mat-step>
-    </mat-stepper>
-</mat-card>
 
-<!-- <input type="file" name="" accept="images" #fileInput (change)="showSelectedFile()" />
-<button mat-raised-button (click)="fileInput.click()">Choisir une image à téléverser</button>
-<div class="file">
-    <p>{{ selectedFile }}</p>
-</div>
-<div class="buttons">
-    <button mat-raised-button matDialogClose>Annuler</button>
-    <button mat-raised-button [disabled]="selectedFile === ''" (click)="uploadFile()">Téléverser</button>
-</div> -->
+
+    <mat-card>
+        <h1>Add a new meal listing!</h1>
+        <mat-stepper orientation="vertical" #stepper>
+            <mat-step [stepControl]="nameAndDescription">
+                <form [formGroup]="nameAndDescription">
+                    <ng-template matStepLabel>Meal Name, Description and Image</ng-template>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Name</mat-label>
+                        <input matInput formControlName="name" required />
+                    </mat-form-field>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Description</mat-label>
+                        <input matInput formControlName="description" required />
+                    </mat-form-field>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Image Link</mat-label>
+                        <input matInput formControlName="imageLink" required />
+                    </mat-form-field>
+                    <div>
+                        <button mat-button matStepperNext>Next</button>
+                    </div>
+                </form>
+            </mat-step>
+            <mat-step [stepControl]="quantityAndPrice">
+                <form [formGroup]="quantityAndPrice">
+                    <ng-template matStepLabel>Servings and Price</ng-template>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Number of Servings</mat-label>
+                        <input matInput formControlName="quantity" required />
+                    </mat-form-field>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Price per serving ($)</mat-label>
+                        <input matInput formControlName="price" required />
+                    </mat-form-field>
+                    <div>
+                        <button mat-button matStepperNext>Next</button>
+                    </div>
+                </form>
+            </mat-step>
+            <mat-step [stepControl]="dates">
+                <form [formGroup]="dates">
+                    <ng-template matStepLabel>Servings and Price</ng-template>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Cooking Date</mat-label>
+                        <input matInput [matDatepicker]="picker1" formControlName="productionDate" required />
+                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                        <mat-datepicker #picker1></mat-datepicker>
+                    </mat-form-field>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Last Date to pickup</mat-label>
+                        <input matInput [matDatepicker]="picker2" formControlName="maxPickupDate" required />
+                        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                        <mat-datepicker #picker2></mat-datepicker>
+                    </mat-form-field>
+                    <div>
+                        <button mat-button matStepperNext>Next</button>
+                    </div>
+                </form>
+            </mat-step>
+            <mat-step>
+                <ng-template matStepLabel>Done!</ng-template>
+                <div>
+                    <button mat-raised-button (click)="stepper.reset()">Cancel</button>
+                    <button mat-raised-button (click)="addProduct()" [disabled]="!isFormValid">Confirm</button>
+                </div>
+            </mat-step>
+        </mat-stepper>
+    </mat-card>
+
+    <!-- <input type="file" name="" accept="images" #fileInput (change)="showSelectedFile()" />
+    <button mat-raised-button (click)="fileInput.click()">Choisir une image à téléverser</button>
+    <div class="file">
+        <p>{{ selectedFile }}</p>
+    </div>
+    <div class="buttons">
+        <button mat-raised-button matDialogClose>Annuler</button>
+        <button mat-raised-button [disabled]="selectedFile === ''" (click)="uploadFile()">Téléverser</button>
+    </div> -->
+    `
+    })
