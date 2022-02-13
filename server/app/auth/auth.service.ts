@@ -25,12 +25,13 @@ export class AuthService {
                 res.locals.userId = payload.username;
                 return next();
             } catch (e) {
+                console.error(e);
                 return res.sendStatus(UNAUTORIZED);
             }
         };
     }
 
-    async getUserIdMock(token: string) {
+    getUserIdMock(token: string) {
         // TODO remove in prod
         switch (token) {
             case 'abc':
@@ -50,6 +51,7 @@ export class AuthService {
         if (userMock) {
             return userMock;
         }
-        return await this.jwtValidator.validate(token);
+        const payload = await this.jwtValidator.validate(token);
+        return payload;
     }
 }

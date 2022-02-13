@@ -76,6 +76,11 @@ export class SellerProfileService {
         await this.sellerCollection.insertOne(newSellerProfile);
     }
 
+    async getProfileWithUserId(userId: string) {
+        console.log(userId);
+        return await this.sellerCollection.findOne({ userId });
+    }
+
     private createNewSellerProfile(creationParams: SellerProfileCreation) {
         const newProfile = creationParams as NewSellerProfile;
         // TODO add url from message server

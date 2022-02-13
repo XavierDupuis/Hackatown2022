@@ -23,6 +23,10 @@ import { CartModalComponent } from './components/main-page/cart/cart-modal/cart-
 import { ModalSelectProductComponent } from './components/main-page/products/modal-select-product/modal-select-product/modal-select-product.component';
 import { NewProductComponent } from './components/main-page/products/new-product/new-product.component';
 import { AuthPageComponent } from './components/pages/auth-page/auth-page.component';
+import { NewSellerPageComponent } from './components/pages/new-seller-page/new-seller-page.component';
+import { PrivateSellerComponent } from './components/pages/seller/private-seller/private-seller.component';
+import { PublicSellerComponent } from './components/pages/seller/public-seller/public-seller.component';
+import { SellerComponent } from './components/pages/seller/seller.component';
 
 Amplify.configure(awsmobile);
 
@@ -39,7 +43,11 @@ Amplify.configure(awsmobile);
         ModalSelectProductComponent,
         CartModalComponent,
         NewProductComponent,
-        PhonePipe
+        PhonePipe,
+        NewSellerPageComponent,
+        SellerComponent,
+        PrivateSellerComponent,
+        PublicSellerComponent,
     ],
     imports: [AppMaterialModule, BrowserModule, AppRoutingModule, BrowserAnimationsModule, AmplifyAuthenticatorModule, FormsModule, HttpClientModule],
     providers: [
