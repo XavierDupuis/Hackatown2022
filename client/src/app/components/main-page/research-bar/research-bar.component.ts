@@ -14,7 +14,7 @@ export class ResearchBarComponent implements OnInit {
 
     addOnBlur = true;
     readonly separatorKeysCodes = [ENTER, COMMA] as const;
-    options: string[] = ['a', 'b', 'c'];
+    options: string[] = ['Vegan', 'Lasagna', 'Yummy'];
 
     add(event: MatChipInputEvent): void {
         const value = (event.value || '').trim();

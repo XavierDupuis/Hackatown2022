@@ -77,7 +77,6 @@ export class SellerProfileService {
     }
 
     async getProfileWithUserId(userId: string) {
-        console.log(userId);
         return await this.sellerCollection.findOne({ userId });
     }
 

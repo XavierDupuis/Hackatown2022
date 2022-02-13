@@ -1,6 +1,6 @@
 <div>
     <mat-form-field class="input" appearance="fill">
-        <mat-label>Favorite Fruits</mat-label>
+        <mat-label>What kind of food are you looking for?</mat-label>
         <mat-chip-list #chipList aria-label="Meal selection">
             <mat-chip *ngFor="let option of options" (removed)="remove(option)">
                 {{ option }}
