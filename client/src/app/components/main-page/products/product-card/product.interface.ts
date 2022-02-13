@@ -6,4 +6,5 @@ export interface Product {
     price: number;
     imageURL: string;
     maxPickupDate: Date;
+    productionDate: Date;
 }

@@ -1,0 +1,100 @@
+<!-- <h1>Create a New Product</h1>
+<form [formGroup]="newProduct" ]>
+    <mat-form-field appearance="fill">
+        <mat-label>Meal name</mat-label>
+        <input matInput type="text" formControlName="name" />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+        <mat-label>Description</mat-label>
+        <input matInput type="text" formControlName="description" />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+        <mat-label>Number of servings</mat-label>
+        <input matInput type="number" formControlName="quantity" />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+        <mat-label>Price ($) per serving</mat-label>
+        <input matInput type="number" formControlName="price" />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+        <mat-label>Cooking date</mat-label>
+        <input matInput [matDatepicker]="picker1" formControlName="productionDate" />
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+        <mat-label>Last date to pickup</mat-label>
+        <input matInput [matDatepicker]="picker2" formControlName="maxPickupDate" />
+        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+    </mat-form-field>
+    <button mat-raised-button (click)="removeData()">
+        <h2>Cancel</h2>
+    </button>
+    <button mat-raised-button (click)="addProduct()" [disabled]="!isDataValid()">
+        <h2>Confirm</h2>
+    </button>
+</form> -->
+<mat-card>
+    <mat-stepper orientation="vertical" #stepper>
+        <mat-step [stepControl]="nameAndDescription">
+            <form [formGroup]="nameAndDescription">
+                <ng-template matStepLabel>Meal Name and Description</ng-template>
+                <mat-form-field appearance="fill">
+                    <mat-label>Name</mat-label>
+                    <input matInput formControlName="name" required />
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-label>Description</mat-label>
+                    <input matInput formControlName="description" required />
+                </mat-form-field>
+                <div>
+                    <button mat-button matStepperNext>Next</button>
+                </div>
+            </form>
+        </mat-step>
+        <mat-step [stepControl]="quantityAndPrice">
+            <form [formGroup]="quantityAndPrice">
+                <ng-template matStepLabel>Servings and Price</ng-template>
+                <mat-form-field appearance="fill">
+                    <mat-label>Number of Servings</mat-label>
+                    <input matInput formControlName="quantity" required />
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-label>Price per serving ($)</mat-label>
+                    <input matInput formControlName="price" required />
+                </mat-form-field>
+                <div>
+                    <button mat-button matStepperNext>Next</button>
+                </div>
+            </form>
+        </mat-step>
+        <mat-step [stepControl]="dates">
+            <form [formGroup]="dates">
+                <ng-template matStepLabel>Servings and Price</ng-template>
+                <mat-form-field appearance="fill">
+                    <mat-label>Cooking Date</mat-label>
+                    <input matInput [matDatepicker]="picker1" formControlName="productionDate" required />
+                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                    <mat-datepicker #picker1></mat-datepicker>
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-label>Last Date to pickup</mat-label>
+                    <input matInput [matDatepicker]="picker2" formControlName="maxPickupDate" required />
+                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                    <mat-datepicker #picker2></mat-datepicker>
+                </mat-form-field>
+                <div>
+                    <button mat-button matStepperNext>Next</button>
+                </div>
+            </form>
+        </mat-step>
+        <mat-step>
+            <ng-template matStepLabel>Done!</ng-template>
+            <div>
+                <button mat-raised-button (click)="stepper.reset()">Cancel</button>
+                <button mat-raised-button (click)="addProduct()" [disabled]="!isFormValid">Confirm</button>
+            </div>
+        </mat-step>
+    </mat-stepper>
+</mat-card>

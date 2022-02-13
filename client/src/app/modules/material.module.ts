@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 // import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatBadgeModule } from '@angular/material/badge';
 // import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -7,7 +8,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 // import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatChipsModule } from '@angular/material/chips';
-// import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
 // import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -26,7 +28,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 // import { MatSliderModule } from '@angular/material/slider';
 // import { MatSnackBarModule } from '@angular/material/snack-bar';
 // import { MatSortModule } from '@angular/material/sort';
-// import { MatStepperModule } from '@angular/material/stepper';
+import { MatStepperModule } from '@angular/material/stepper';
 import { MatTableModule } from '@angular/material/table';
 // import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -39,7 +41,7 @@ const modules = [
     // MatCheckboxModule,
     // MatCheckboxModule,
     MatChipsModule,
-    // MatDatepickerModule,
+    MatDatepickerModule,
     MatDialogModule,
     // MatExpansionModule,
     MatFormFieldModule,
@@ -58,12 +60,14 @@ const modules = [
     MatSlideToggleModule,
     // MatSnackBarModule,
     // MatSortModule,
-    // MatStepperModule,
+    MatStepperModule,
     MatTableModule,
     // MatTabsModule,
     MatToolbarModule,
     // MatTooltipModule,
     MatBadgeModule,
+    ReactiveFormsModule,
+    MatNativeDateModule,
 ];
 
 /**

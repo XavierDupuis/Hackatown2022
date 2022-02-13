@@ -20,6 +20,7 @@ import awsmobile from '../aws-exports';
 import { CartModalComponent } from './components/main-page/cart/cart-modal/cart-modal.component';
 // eslint-disable-next-line max-len
 import { ModalSelectProductComponent } from './components/main-page/products/modal-select-product/modal-select-product/modal-select-product.component';
+import { NewProductComponent } from './components/main-page/products/new-product/new-product.component';
 import { AuthPageComponent } from './components/pages/auth-page/auth-page.component';
 
 Amplify.configure(awsmobile);
@@ -36,6 +37,7 @@ Amplify.configure(awsmobile);
         AuthPageComponent,
         ModalSelectProductComponent,
         CartModalComponent,
+        NewProductComponent,
     ],
     imports: [AppMaterialModule, BrowserModule, AppRoutingModule, BrowserAnimationsModule, AmplifyAuthenticatorModule, FormsModule, HttpClientModule],
     providers: [
