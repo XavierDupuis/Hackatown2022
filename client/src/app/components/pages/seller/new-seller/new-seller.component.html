@@ -1,12 +1,11 @@
-<p>new-seller works!</p>
-<button mat-button (click)="create()">create</button>
 <div [formGroup]="newSellerFrom">
     <mat-form-field>
         <mat-label>Name</mat-label>
-        <input matInput />
+        <input matInput formControlName="name" />
     </mat-form-field>
     <mat-form-field appearance="fill">
         <mat-label>Description</mat-label>
-        <textarea matInput></textarea>
+        <textarea matInput formControlName="description"></textarea>
     </mat-form-field>
 </div>
+<button mat-button (click)="create()">create</button>
