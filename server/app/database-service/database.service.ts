@@ -60,11 +60,10 @@ export class DatabaseService {
                 return;
             }
             await this.db.createCollection(SELLER_COLLECTION);
-            // TODO index?
-            await this.db.collection(SELLER_COLLECTION);
+
+            await this.db.collection(SELLER_COLLECTION).createIndex({ userId: 1 }, { unique: true });
             this.populateSellerCollection();
         } catch (error) {
-            // console.error();
             throw Error('Data base collection creation error');
         }
     }
