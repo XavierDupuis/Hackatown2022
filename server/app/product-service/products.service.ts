@@ -25,6 +25,7 @@ export class ProductService {
             quantityInitial: product.quantityInitial,
             imageURL: product.imageURL,
             maxPickupDate: product.maxPickupDate,
+            productionDate: product.productionDate,
         });
     }
 
