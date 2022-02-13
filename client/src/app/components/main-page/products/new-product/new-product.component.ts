@@ -52,7 +52,6 @@ export class NewProductComponent implements OnInit {
             productionDate: new Date(this.dates.controls.productionDate.value),
         };
         this.productService.addProduct(newProduct);
-        console.log(newProduct);
     }
 
     private initForm() {
