@@ -1,6 +1,8 @@
+import { AuthService } from '@app/auth/auth.service';
 import { HttpException } from '@app/classes/http.exception';
 import { OrderController } from '@app/controllers/orders.controller';
 import { ProductController } from '@app/controllers/product.controller';
+import { SellerProfileController } from '@app/sellers/controllers/seller-profile.controller';
 import * as cookieParser from 'cookie-parser';
 import * as cors from 'cors';
 import * as express from 'express';
@@ -16,7 +18,12 @@ export class Application {
     private readonly internalError: number = StatusCodes.INTERNAL_SERVER_ERROR;
     private readonly swaggerOptions: swaggerJSDoc.Options;
 
-    constructor(private readonly productController: ProductController, private readonly orderController: OrderController) {
+    constructor(
+        private readonly productController: ProductController,
+        private readonly orderController: OrderController,
+        private readonly sellerProfileController: SellerProfileController,
+        private readonly authService: AuthService,
+    ) {
         this.app = express();
 
         this.swaggerOptions = {
@@ -38,11 +45,10 @@ export class Application {
     bindRoutes(): void {
         this.app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerJSDoc(this.swaggerOptions)));
         this.app.use('/api/products', this.productController.router);
+        this.app.use(this.authService.middleware);
         this.app.use('/api/orders', this.orderController.router);
+        this.app.use('/api/sellers', this.sellerProfileController.router);
 
-        this.app.use('/', (req, res) => {
-            res.redirect('/api/docs');
-        });
         this.errorHandling();
     }
 
