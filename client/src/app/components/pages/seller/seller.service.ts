@@ -13,6 +13,7 @@ export class SellerService {
     constructor(private http: HttpClient) {}
 
     getSeller(sellerId: string) {
+        console.log('sellerId', sellerId);
         this.http.get(`${environment.serverURL}/sellers/${sellerId}`).subscribe(
             (res) => {
                 if (res === null) {
