@@ -24,6 +24,7 @@ export class SellerIdentityService {
                 }
                 const seller = res as Seller;
                 const identity = seller._id !== undefined ? { id: seller._id } : undefined;
+
                 this.userSellerIdentity.next(identity);
             },
             () => {

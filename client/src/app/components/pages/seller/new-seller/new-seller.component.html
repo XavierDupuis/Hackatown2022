@@ -1,11 +1,11 @@
 <div [formGroup]="newSellerFrom">
     <mat-form-field>
         <mat-label>Name</mat-label>
-        <input matInput formControlName="name" />
+        <input matInput formControlName="name" required />
     </mat-form-field>
     <mat-form-field appearance="fill">
         <mat-label>Description</mat-label>
         <textarea matInput formControlName="description"></textarea>
     </mat-form-field>
 </div>
-<button mat-button (click)="create()">create</button>
+<button mat-button (click)="create()">Create My User Page</button>

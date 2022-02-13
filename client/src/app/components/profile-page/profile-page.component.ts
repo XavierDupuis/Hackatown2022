@@ -1,7 +1,10 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable @typescript-eslint/naming-convention */
 import { AfterViewInit, Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AuthService } from '@app/auth/services/auth.service';
+import { NewSellerComponent } from '@app/components/pages/seller/new-seller/new-seller.component';
 import { Order } from '@app/interfaces/order.interface';
 import { ProfileService } from '@app/services/profile-service/profile.service';
 
@@ -31,11 +34,10 @@ export class ProfilePageComponent implements AfterViewInit {
         sub: 'string',
     };
     orders: Order[];
-    constructor(private authService: AuthService, private router: Router, private profileService: ProfileService) {}
+    constructor(private authService: AuthService, private router: Router, private profileService: ProfileService, private modal: MatDialog) {}
 
     ngAfterViewInit(): void {
         this.getUser();
-
         this.profileService.requestOrdersList().subscribe((result) => {
             const newOrders = result as Order[];
             this.orders = newOrders;
@@ -55,5 +57,9 @@ export class ProfilePageComponent implements AfterViewInit {
 
     goToMyPage() {
         this.router.navigate(['/seller/me']);
+    }
+
+    updateSellerPage() {
+        this.modal.open(NewSellerComponent, { width: '100' });
     }
 }

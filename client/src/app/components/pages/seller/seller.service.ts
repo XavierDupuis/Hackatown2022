@@ -20,6 +20,7 @@ export class SellerService {
                     return;
                 }
                 const seller = res as Seller;
+
                 this.currentSeller.next(seller);
             },
             () => {

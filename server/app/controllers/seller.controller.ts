@@ -1,3 +1,4 @@
+import { OrderService } from '@app/orders/order.service';
 import { ActiveProductService } from '@app/product-service/active-products.service';
 import { InactiveProductsService } from '@app/product-service/inactive-products.service';
 import { SellerProfileService } from '@app/sellers/service/seller-profile.service';
@@ -14,6 +15,7 @@ export class SellerController {
         private inactiveProductService: InactiveProductsService,
         private activeProductService: ActiveProductService,
         private sellerService: SellerProfileService,
+        private orderService: OrderService,
     ) {
         this.configureRouter();
     }
@@ -24,14 +26,21 @@ export class SellerController {
         this.router.get('/order', async (req, res) => {
             try {
                 const { userId } = res.locals;
-                const activeproducts = await this.activeProductService.getProductsFromSeller(userId);
-                const productHistory = activeproducts.concat(activeproducts);
-                return res.send(productHistory);
+                const orders = await this.orderService.getOrders(userId);
+                return res.send(orders);
             } catch (e) {
                 return res.sendStatus(ERROR);
             }
         });
-
+        this.router.get('/', async (req, res) => {
+            try {
+                const { userId } = res.locals;
+                const activeproducts = await this.activeProductService.getProductsFromSeller(userId);
+                return res.send(activeproducts);
+            } catch (e) {
+                return res.sendStatus(ERROR);
+            }
+        });
         this.router.get('/history', async (req, res) => {
             try {
                 const { userId } = res.locals;
