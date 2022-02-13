@@ -1,40 +1,3 @@
-<!-- <h1>Create a New Product</h1>
-<form [formGroup]="newProduct" ]>
-    <mat-form-field appearance="fill">
-        <mat-label>Meal name</mat-label>
-        <input matInput type="text" formControlName="name" />
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-        <mat-label>Description</mat-label>
-        <input matInput type="text" formControlName="description" />
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-        <mat-label>Number of servings</mat-label>
-        <input matInput type="number" formControlName="quantity" />
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-        <mat-label>Price ($) per serving</mat-label>
-        <input matInput type="number" formControlName="price" />
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-        <mat-label>Cooking date</mat-label>
-        <input matInput [matDatepicker]="picker1" formControlName="productionDate" />
-        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-        <mat-datepicker #picker1></mat-datepicker>
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-        <mat-label>Last date to pickup</mat-label>
-        <input matInput [matDatepicker]="picker2" formControlName="maxPickupDate" />
-        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-        <mat-datepicker #picker2></mat-datepicker>
-    </mat-form-field>
-    <button mat-raised-button (click)="removeData()">
-        <h2>Cancel</h2>
-    </button>
-    <button mat-raised-button (click)="addProduct()" [disabled]="!isDataValid()">
-        <h2>Confirm</h2>
-    </button>
-</form> -->
 <mat-card>
     <mat-stepper orientation="vertical" #stepper>
         <mat-step [stepControl]="nameAndDescription">
@@ -98,3 +61,13 @@
         </mat-step>
     </mat-stepper>
 </mat-card>
+
+<input type="file" name="" accept="images" #fileInput (change)="showSelectedFile()" />
+<button mat-raised-button (click)="fileInput.click()">Choisir une image à téléverser</button>
+<div class="file">
+    <p>{{ selectedFile }}</p>
+</div>
+<div class="buttons">
+    <button mat-raised-button matDialogClose>Annuler</button>
+    <button mat-raised-button [disabled]="selectedFile === ''" (click)="uploadFile()">Téléverser</button>
+</div>

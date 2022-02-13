@@ -1,13 +1,13 @@
-import { OrderedProducts } from '@app/interfaces/ordered-product.interface';
+import { OrderedProduct as OrderedProduct } from '@app/interfaces/ordered-product.interface';
 
 export interface Order {
     userId: string;
     total: number;
-    orderedProducts: OrderedProducts[];
+    orderedProducts: OrderedProduct[];
     date: Date;
 }
 
 export interface OrderUI {
     total: number;
-    orderedProducts: OrderedProducts[];
+    orderedProducts: OrderedProduct[];
 }

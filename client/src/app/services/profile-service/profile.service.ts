@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Order } from '@app/interfaces/order.interface';
+import { ProductAddedToCart } from '@app/interfaces/product.interface';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -16,8 +16,9 @@ export class ProfileService {
     return this.http.get(`${environment.serverURL}/orders`);
   }
 
-  addOrder(order: Order) {
-    return this.http.post(`${environment.serverURL}/orders`, order, { responseType: 'json' });
+  addOrder(products: ProductAddedToCart[], totalCost: number) {
+    // const newOrder: Order = { date: new Date(Date.now()), orderedProduct: products, total: totalCost };
+    return this.http.post(`${environment.serverURL}/order`, null, { responseType: 'json' }).subscribe();
   }
 
 }

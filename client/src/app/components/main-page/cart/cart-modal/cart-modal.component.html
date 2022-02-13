@@ -1,4 +1,5 @@
 <div *ngIf="areThereProductsInCart(); else empty_cart">
+    <h2>Your Order</h2>
     <table mat-table [dataSource]="cartProducts" class="mat-elevation-z8">
         <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef>Product</th>
@@ -41,6 +42,7 @@
         <tr mat-footer-row *matFooterRowDef="displayedColumns" class="example-first-footer-row"></tr>
         <tr mat-footer-row *matFooterRowDef="['disclaimer']" class="example-second-footer-row"></tr>
     </table>
+    <button mat-raised-button (click)="confirmOrder()">Confirm Order</button>
 </div>
 <ng-template #empty_cart>
     <p>Empty Cart</p>

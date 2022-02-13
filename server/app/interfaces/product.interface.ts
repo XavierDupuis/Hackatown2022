@@ -12,6 +12,7 @@ export interface Product {
     productionDate: Date;
 }
 
-// export interface ProductDB extends Product {
-//     id: string;
-// }
+export interface ProductAddedToCart {
+    product: Product;
+    quantity: number;
+}

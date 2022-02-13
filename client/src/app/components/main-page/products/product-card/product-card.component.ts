@@ -1,11 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 // eslint-disable-next-line max-len
-import {
-    ModalSelectProductComponent,
-    ProductAddedToCart
-} from '@app/components/main-page/products/modal-select-product/modal-select-product/modal-select-product.component';
-import { Product } from '@app/interfaces/product.interface';
+import { ModalSelectProductComponent } from '@app/components/main-page/products/modal-select-product/modal-select-product/modal-select-product.component';
+import { Product, ProductAddedToCart } from '@app/interfaces/product.interface';
 import { CartService } from '@app/services/cart-service/cart.service';
 
 @Component({

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ProductAddedToCart } from '@app/components/main-page/products/modal-select-product/modal-select-product/modal-select-product.component';
+import { ProductAddedToCart } from '@app/interfaces/product.interface';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
@@ -8,7 +8,7 @@ import { BehaviorSubject } from 'rxjs';
 export class CartService {
     selectedProducts: ProductAddedToCart[] = [];
     selectedProductsSubject: BehaviorSubject<ProductAddedToCart[]> = new BehaviorSubject<ProductAddedToCart[]>([]);
-    constructor() {}
+    constructor(/*private http: HttpClient*/) {}
 
     addProduct(productToAdd: ProductAddedToCart) {
         if (!productToAdd) {

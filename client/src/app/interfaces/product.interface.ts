@@ -8,3 +8,9 @@ export interface Product {
     maxPickupDate: Date;
     productionDate: Date;
 }
+
+
+export interface ProductAddedToCart {
+    product: Product;
+    quantity: number;
+}
