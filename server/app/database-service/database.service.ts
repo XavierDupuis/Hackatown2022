@@ -4,7 +4,7 @@ import {
     BASIC_PRODUCTS,
     BASIC_SELLER,
     INACTIVE_PRODUCTS_COLLECTION,
-    ORDERS_COLLECTION
+    ORDERS_COLLECTION,
 } from '@app/database-service/constants';
 import { SELLER_COLLECTION } from '@app/sellers/seller-constants';
 import { CollectionInfo, Db, MongoClient } from 'mongodb';

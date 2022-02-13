@@ -20,7 +20,6 @@ export class OrderController {
         this.router.get('/', async (req, res) => {
             try {
                 const { userId } = res.locals;
-                console.log(userId);
                 const orders = await this.orderService.getOrders(userId);
                 return res.send(orders);
             } catch (e) {
@@ -33,13 +32,11 @@ export class OrderController {
                 const { userId } = res.locals;
                 const order = req.body as OrderUI;
                 const result = await this.orderHandler.createOrder(order, userId);
-                console.log(result);
                 if (result) {
                     return res.sendStatus(OK);
                 }
                 return res.sendStatus(ERROR);
             } catch (e) {
-                console.log(e);
                 return res.sendStatus(ERROR);
             }
         });

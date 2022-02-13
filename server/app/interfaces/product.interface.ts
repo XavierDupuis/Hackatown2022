@@ -1,6 +1,6 @@
 import { ObjectId } from 'mongodb';
 
-export interface Product {
+export interface ProductUI {
     id?: ObjectId;
     name: string;
     description: string;
@@ -11,8 +11,6 @@ export interface Product {
     maxPickupDate: Date;
     productionDate: Date;
 }
-
-export interface ProductAddedToCart {
-    product: Product;
-    quantity: number;
+export interface Product extends ProductUI {
+    sellerId: string;
 }

@@ -2,6 +2,7 @@ import { AuthService } from '@app/auth/auth.service';
 import { HttpException } from '@app/classes/http.exception';
 import { OrderController } from '@app/controllers/orders.controller';
 import { ProductController } from '@app/controllers/product.controller';
+import { SellerController } from '@app/controllers/seller.controller';
 import { SellerProfileController } from '@app/sellers/controllers/seller-profile.controller';
 import * as cookieParser from 'cookie-parser';
 import * as cors from 'cors';
@@ -22,6 +23,7 @@ export class Application {
         private readonly productController: ProductController,
         private readonly orderController: OrderController,
         private readonly sellerProfileController: SellerProfileController,
+        private readonly sellerController: SellerController,
         private readonly authService: AuthService,
     ) {
         this.app = express();
@@ -48,6 +50,7 @@ export class Application {
         this.app.use(this.authService.middleware);
         this.app.use('/api/orders', this.orderController.router);
         this.app.use('/api/sellers', this.sellerProfileController.router);
+        this.app.use('/api/sellerFood', this.sellerController.router); // TODO: change name of path
 
         this.errorHandling();
     }
