@@ -10,6 +10,7 @@ import { MainPageComponent } from '@app/components/main-page/main-page.component
 import { ProductCardListComponent } from '@app/components/main-page/products/product-card-list/product-card-list.component';
 import { ProductCardComponent } from '@app/components/main-page/products/product-card/product-card.component';
 import { ResearchBarComponent } from '@app/components/main-page/research-bar/research-bar.component';
+import { NewSellerComponent } from '@app/components/pages/seller/new-seller/new-seller.component';
 import { ProfilePageComponent } from '@app/components/profile-page/profile-page.component';
 import { AppRoutingModule } from '@app/modules/app-routing.module';
 import { AppMaterialModule } from '@app/modules/material.module';
@@ -47,8 +48,10 @@ Amplify.configure(awsmobile);
         PhonePipe,
         NewSellerPageComponent,
         SellerComponent,
+        NewSellerComponent,
         PrivateSellerComponent,
         PublicSellerComponent,
+        NewProductComponent,
         OrderComponent,
     ],
     imports: [AppMaterialModule, BrowserModule, AppRoutingModule, BrowserAnimationsModule, AmplifyAuthenticatorModule, FormsModule, HttpClientModule],

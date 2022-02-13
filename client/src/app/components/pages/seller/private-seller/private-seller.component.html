@@ -1,1 +1,25 @@
-<p>private-seller works!</p>
+<!-- <app-new-seller *ngIf="!hasSellerAccount"></app-new-seller>
+    <div *ngIf="hasSellerAccount">Private account</div> -->
+
+<mat-card id="header">
+    <h1 id="name">{{ name }}</h1>
+    <h2 id="description">{{ description }}</h2>
+</mat-card>
+<mat-card>
+    <h1 id="title">Available Products</h1>
+    <mat-card class="product-card" *ngFor="let product of products">
+        <img class="image" [src]="product.imageURL" />
+        <h2>{{ product.name }}</h2>
+        <div>
+            <i>{{ product.description }}</i>
+        </div>
+        <div>{{ product.price / 100 | currency }}</div>
+        <div>
+            Left Quantity : <strong>{{ product.quantityLeft }}</strong>
+        </div>
+        <div>
+            Last Date : <strong>{{ product.maxPickupDate | date }}</strong>
+        </div>
+        <!-- <a href="">SELLER LINK</a> TODO: -->
+    </mat-card>
+</mat-card>

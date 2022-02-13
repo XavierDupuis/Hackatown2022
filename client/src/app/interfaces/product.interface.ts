@@ -1,6 +1,7 @@
 export interface Product {
     _id?: string;
     name: string;
+    sellerId?: string;
     description: string;
     quantityInitial: number;
     quantityLeft: number;
@@ -9,7 +10,6 @@ export interface Product {
     maxPickupDate: Date;
     productionDate: Date;
 }
-
 
 export interface ProductAddedToCart {
     product: Product;
