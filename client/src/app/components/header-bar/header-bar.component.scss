@@ -1,6 +1,19 @@
-* {
+// * {
+//     display: flex;
+//     justify-content: space-around;
+// }
+.toolbar {
     display: flex;
-    justify-content: space-around;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: rgba(238, 237, 237, 0.87);
+    height: fit-content;
+}
+
+.icons {
+    display: flex;
+    flex-direction: row;
+    margin-right: 8vw;
 }
 
 mat-icon {

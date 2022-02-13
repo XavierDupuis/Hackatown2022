@@ -18,6 +18,6 @@ export class ProductService {
     }
 
     addProduct(product: Product) {
-        return this.http.post(`${environment.serverURL}/products`, product, { responseType: 'json' }).subscribe();
+        return this.http.post(`${environment.serverURL}/sellerFood`, product, { responseType: 'json' }).subscribe();
     }
 }
