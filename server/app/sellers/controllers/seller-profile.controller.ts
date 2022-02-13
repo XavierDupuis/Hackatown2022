@@ -20,6 +20,17 @@ export class SellerProfileController {
         this.router.get('/:id', async (req, res) => {
             // TODO if userId === id then return private profile
             const { id } = req.params;
+            if (id === 'me') {
+                const { userId } = res.locals;
+                console.log('userId', userId);
+                try {
+                    const seller = await this.sellerProfileService.getProfileWithUserId(userId);
+                    return res.send(seller);
+                } catch (e) {
+                    return res.sendStatus(ERROR);
+                }
+            }
+
             try {
                 const seller = await this.sellerProfileService.getProfile(id);
                 return res.send(seller);

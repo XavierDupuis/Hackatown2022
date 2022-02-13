@@ -19,9 +19,10 @@ export class AuthInterceptor implements HttpInterceptor {
                 const reqWithAuth = request.clone({
                     setHeaders: {
                         // eslint-disable-next-line @typescript-eslint/naming-convention
-                        Autorization: `Bearer ${jwt}`,
+                        Authorization: `Bearer ${jwt}`,
                     },
                 });
+                console.log(reqWithAuth);
                 return next.handle(reqWithAuth);
             }),
         );
