@@ -1,5 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { SellerIdentityService } from '@app/auth/services/seller-identity.service';
 import { Product } from '@app/interfaces/product.interface';
 import { ProductService } from '@app/services/product-service/product.service';
 @Component({
@@ -19,23 +21,19 @@ export class NewProductComponent implements OnInit {
         return this.inputRef.nativeElement;
     }
 
-
-    constructor(private formBuilder: FormBuilder, private productService: ProductService, /*private http: HttpClient*/) {}
+    constructor(
+        private formBuilder: FormBuilder,
+        private productService: ProductService,
+        private sellerIdentity: SellerIdentityService,
+        private router: Router,
+    ) {}
 
     ngOnInit(): void {
-        this.nameAndDescription = this.formBuilder.group({
-            name: ['', Validators.required],
-            description: ['', Validators.required],
-            imageLink: ['', Validators.required],
-        });
-        this.quantityAndPrice = this.formBuilder.group({
-            quantity: [1, [Validators.required, Validators.min(1)]],
-            price: [0, [Validators.required, Validators.min(0)]],
-        });
-        this.dates = this.formBuilder.group({
-            productionDate: [new Date(), Validators.required],
-            maxPickupDate: [new Date(), [Validators.required, Validators.min(Date.now())]],
-        });
+        this.initForm();
+        const isSeller = this.sellerIdentity.userSellerIdentity.getValue();
+        if (!isSeller) {
+            this.router.navigate(['/seller/me']);
+        }
     }
 
     get isFormValid() {
@@ -54,7 +52,23 @@ export class NewProductComponent implements OnInit {
             productionDate: new Date(this.dates.controls.productionDate.value),
         };
         this.productService.addProduct(newProduct);
-        console.log(newProduct)
+        console.log(newProduct);
+    }
+
+    private initForm() {
+        this.nameAndDescription = this.formBuilder.group({
+            name: ['', Validators.required],
+            description: ['', Validators.required],
+            imageLink: ['', Validators.required],
+        });
+        this.quantityAndPrice = this.formBuilder.group({
+            quantity: [1, [Validators.required, Validators.min(1)]],
+            price: [0, [Validators.required, Validators.min(0)]],
+        });
+        this.dates = this.formBuilder.group({
+            productionDate: [new Date(), Validators.required],
+            maxPickupDate: [new Date(), [Validators.required, Validators.min(Date.now())]],
+        });
     }
 
     // showSelectedFile() {
@@ -104,7 +118,6 @@ export class NewProductComponent implements OnInit {
     //         });
     //     };
 
-
     //     // const formData = new FormData();
     //     // formData.append('image', file);
     //     // const response = await fetch('https://api.imgur.com/3/image', {
@@ -118,5 +131,3 @@ export class NewProductComponent implements OnInit {
     //     console.log("FILE LINK", this.fileLink);
     // }
 }
-
-
