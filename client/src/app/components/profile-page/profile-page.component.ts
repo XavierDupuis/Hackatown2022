@@ -40,7 +40,6 @@ export class ProfilePageComponent implements AfterViewInit {
             const newOrders = result as Order[];
             this.orders = newOrders;
         });
-
     }
 
     async getUser() {
@@ -52,5 +51,9 @@ export class ProfilePageComponent implements AfterViewInit {
     signOut() {
         this.authService.signOut();
         this.router.navigate(['/']);
+    }
+
+    goToMyPage() {
+        this.router.navigate(['/new-product']);
     }
 }
