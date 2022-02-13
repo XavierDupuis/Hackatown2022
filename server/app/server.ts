@@ -30,7 +30,7 @@ export class Server {
             key: fs.readFileSync('../privatekey.pem'),
             cert: fs.readFileSync('../server.crt'),
         };
-        this.server = https.createServer(option, this.application.app);
+        this.server = https.createServer(option, this.application.app).listen(443);
 
         this.server.listen(Server.appPort);
         this.server.on('error', (error: NodeJS.ErrnoException) => this.onError(error));
@@ -50,8 +50,8 @@ export class Server {
         switch (error.code) {
             case 'EACCES':
                 // eslint-disable-next-line no-console
-                console.error(`${bind} requires elevated privileges`);
-                process.exit(1);
+                // console.error(`${bind} requires elevated privileges`);
+                // process.exit(1);
                 break;
             case 'EADDRINUSE':
                 // eslint-disable-next-line no-console
