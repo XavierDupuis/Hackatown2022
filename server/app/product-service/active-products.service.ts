@@ -1,6 +1,6 @@
 import { ACTIVE_PRODUCTS_COLLECTION } from '@app/database-service/constants';
 import { DatabaseService } from '@app/database-service/database.service';
-import { Product } from '@app/interfaces/product.interface';
+import { Product, ProductUI } from '@app/interfaces/product.interface';
 import { Collection, ObjectId } from 'mongodb';
 import { Service } from 'typedi';
 
@@ -16,9 +16,14 @@ export class ActiveProductService {
         return await this.collection.find().toArray();
     }
 
-    async addProduct(product: Product): Promise<void> {
+    async getProductsFromSeller(sellerId: string): Promise<Product[]> {
+        return await this.collection.find({ sellerId }).toArray();
+    }
+
+    async addProduct(product: ProductUI, sellerId: string): Promise<void> {
         await this.collection.insertOne({
             name: product.name,
+            sellerId,
             description: product.description,
             price: product.price,
             quantityLeft: product.quantityLeft,

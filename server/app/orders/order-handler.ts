@@ -2,14 +2,17 @@
 import { OrderUI } from '@app/interfaces/order.interface';
 import { OrderService } from '@app/orders/order.service';
 import { ActiveProductService } from '@app/product-service/active-products.service';
-import { ProductService } from '@app/product-service/products.service';
+import { InactiveProductsService } from '@app/product-service/inactive-products.service';
 import { ObjectId } from 'mongodb';
 import { Service } from 'typedi';
 
-
 @Service()
 export class OrderHandler {
-    constructor(private activeProducts: ActiveProductService, private inactiveProducts: ProductService, private orderService: OrderService) {}
+    constructor(
+        private activeProducts: ActiveProductService,
+        private inactiveProducts: InactiveProductsService,
+        private orderService: OrderService,
+    ) {}
 
     async createOrder(orderUI: OrderUI, userId: string): Promise<boolean> {
         // TODO validate orderinfo
@@ -17,11 +20,11 @@ export class OrderHandler {
         for (const orderedProduct of orderUI.orderedProducts) {
             const product = await this.activeProducts.getProduct(new ObjectId(orderedProduct.productId));
             if (product === null) {
-                throw Error("Product inactive");
+                throw Error('Product inactive');
             }
             const newQuantity = product.quantityLeft - orderedProduct.quantity;
             if (newQuantity < 0) {
-                throw Error("Not enough product left");
+                throw Error('Not enough product left');
             }
 
             await this.activeProducts.updateProductQty(new ObjectId(orderedProduct.productId), newQuantity);
@@ -38,9 +41,8 @@ export class OrderHandler {
         const product = await this.activeProducts.getProduct(new ObjectId(productId));
         if (product !== null) {
             await this.activeProducts.deleteProduct(new ObjectId(productId));
-            await this.inactiveProducts.addProduct(product);
+            await this.inactiveProducts.addProduct(product, product.sellerId);
         }
-
     }
     // private validateOrder(order: OrderUI) {
 
