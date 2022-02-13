@@ -68,7 +68,7 @@ export class SellerProfileService {
     }
 
     async getProfile(id: string) {
-        await this.sellerCollection.findOne({ _id: new ObjectId(id) });
+        return await this.sellerCollection.findOne({ _id: new ObjectId(id) });
     }
 
     async createProfile(creationParams: SellerProfileCreation) {
