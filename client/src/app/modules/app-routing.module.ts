@@ -11,7 +11,11 @@ const routes: Routes = [
     { path: 'home', component: MainPageComponent },
     { path: '', redirectTo: '/home', pathMatch: 'full' },
     { path: 'login', component: AuthPageComponent },
-    { path: 'new-product', component: NewProductComponent },
+    {
+        path: 'new-product',
+        canActivate: [AuthGuard],
+        component: NewProductComponent,
+    },
     // { path: '**', redirectTo: '/home' },
     {
         path: 'profile',

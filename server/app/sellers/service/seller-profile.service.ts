@@ -81,6 +81,11 @@ export class SellerProfileService {
         return await this.sellerCollection.findOne({ userId });
     }
 
+    async isSellerExists(sellerId: string) {
+        const result = await this.sellerCollection.findOne({ userId: sellerId });
+        return result !== null;
+    }
+
     private createNewSellerProfile(creationParams: SellerProfileCreation) {
         const newProfile = creationParams as NewSellerProfile;
         // TODO add url from message server

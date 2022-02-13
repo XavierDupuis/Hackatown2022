@@ -1,5 +1,6 @@
 import { ActiveProductService } from '@app/product-service/active-products.service';
 import { InactiveProductsService } from '@app/product-service/inactive-products.service';
+import { SellerProfileService } from '@app/sellers/service/seller-profile.service';
 import { Router } from 'express';
 import { Service } from 'typedi';
 
@@ -9,7 +10,11 @@ const OK = 200;
 export class SellerController {
     router: Router;
 
-    constructor(private inactiveProductService: InactiveProductsService, private activeProductService: ActiveProductService) {
+    constructor(
+        private inactiveProductService: InactiveProductsService,
+        private activeProductService: ActiveProductService,
+        private sellerService: SellerProfileService,
+    ) {
         this.configureRouter();
     }
 
@@ -43,6 +48,10 @@ export class SellerController {
             try {
                 const product = req.body;
                 const { userId } = res.locals;
+                const exists = await this.sellerService.isSellerExists(userId);
+                if (!exists) {
+                    return res.sendStatus(401);
+                }
                 await this.activeProductService.addProduct(product, userId);
                 return res.sendStatus(OK);
             } catch (e) {
