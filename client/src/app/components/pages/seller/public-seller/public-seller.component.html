@@ -1,14 +1,15 @@
-<!-- <app-new-seller *ngIf="!hasSellerAccount"></app-new-seller>
-    <div *ngIf="hasSellerAccount">Private account</div> -->
+<mat-card *ngIf="!found">
+    <h1>We're sorry, this seller page is not available</h1>
+</mat-card>
 
-<mat-card>
+<mat-card *ngIf="found">
     <h1>Welcome!</h1>
     <div id="header">
         <h2>{{ name }}</h2>
         <p>{{ description }}</p>
     </div>
 </mat-card>
-<mat-card>
+<mat-card *ngIf="found">
     <h1>Available Products</h1>
     <mat-card class="product-card" *ngFor="let product of products">
         <img class="image" [src]="product.imageURL" />
@@ -23,6 +24,5 @@
         <div>
             Last Date : <strong>{{ product.maxPickupDate | date }}</strong>
         </div>
-        <!-- <a href="">SELLER LINK</a> TODO: -->
     </mat-card>
 </mat-card>

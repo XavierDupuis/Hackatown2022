@@ -15,4 +15,8 @@ export class ProfileService {
   requestProductFromUser() {
     return this.http.get(`${environment.serverURL}/sellerFood`);
   }
+
+  requestProductFromSeller(sellerId: string) {
+    return this.http.get(`${environment.serverURL}/sellerFood/seller-products/${sellerId}`);
+  }
 }

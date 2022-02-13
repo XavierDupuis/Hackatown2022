@@ -29,4 +29,8 @@ export class SellerService {
             },
         );
     }
+
+    getSellerIdFromUserId(userId: string) {
+        return this.http.get(`${environment.serverURL}/sellerFood/seller-id/${userId}`);
+    }
 }

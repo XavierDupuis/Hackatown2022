@@ -1,15 +1,19 @@
-<mat-card (click)="openProductSelectionDialog()">
-    <img class="image" [src]="product.imageURL" />
-    <h2>{{ product.name }}</h2>
-    <div>
-        <i>{{ product.description }}</i>
-    </div>
-    <div>{{ product.price / 100 | currency }}</div>
-    <div>
-        Left Quantity : <strong>{{ product.quantityLeft }}</strong>
-    </div>
-    <div>
-        Last Date : <strong>{{ product.maxPickupDate | date }}</strong>
-    </div>
-    <!-- <a href="">SELLER LINK</a> TODO: -->
+<mat-card>
+    <mat-card-content (click)="openProductSelectionDialog()">
+        <img class="image" [src]="product.imageURL" />
+        <h2>{{ product.name }}</h2>
+        <div>
+            <i>{{ product.description }}</i>
+        </div>
+        <div>{{ product.price / 100 | currency }}</div>
+        <div>
+            Left Quantity : <strong>{{ product.quantityLeft }}</strong>
+        </div>
+        <div>
+            Last Date : <strong>{{ product.maxPickupDate | date }}</strong>
+        </div>
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-flat-button (click)="goToSellerPage()">Go To Seller Page</button>
+    </mat-card-actions>
 </mat-card>

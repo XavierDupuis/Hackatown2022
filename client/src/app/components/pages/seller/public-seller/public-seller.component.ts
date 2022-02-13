@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 import { SellerIdentityService } from '@app/auth/services/seller-identity.service';
 import { Seller } from '@app/auth/services/seller.interface';
 import { SellerService } from '@app/components/pages/seller/seller.service';
@@ -10,43 +10,29 @@ import { ProfileService } from '@app/services/profile-service/profile.service';
     templateUrl: './public-seller.component.html',
     styleUrls: ['./public-seller.component.scss'],
 })
-export class PublicSellerComponent {
+export class PublicSellerComponent implements AfterViewInit {
     found: boolean = false;
     sellerInfo: Seller;
     products: Product[];
     constructor(private sellerIdentity: SellerIdentityService, private sellerService: SellerService, private profileService: ProfileService) {
-        // this.sellerIdentity.userSellerIdentity.subscribe((id) => {
-        //     console.log('my seller id', id);
-        //     this.sellerId = id === undefined ? '' : id.id;
-        // });
-        // console.log(this.sellerId);
-        // // Todo: if userid is undefined
-        // this.sellerService.currentSeller.subscribe((sellerInfo) => {
-        //     if (sellerInfo !== undefined) {
-        //         this.sellerInfo = sellerInfo;
-        //     }
-        // });
-        // this.sellerService.getSeller(this.sellerId);
-        // console.log(this.sellerInfo);
-    }
-
-    ngAfterViewInit() {
-        console.log('public');
         this.sellerService.currentSeller.subscribe((seller) => {
             if (seller === undefined) {
+                this.products = [];
+                this.found = false;
                 return;
             }
+            this.found = true;
+            // eslint-disable-next-line no-underscore-dangle
+            this.getProductsFromUser(seller.userId);
             this.sellerInfo = seller;
         });
     }
 
+    ngAfterViewInit() {}
+
     get hasSellerAccount() {
         return this.sellerIdentity.userSellerIdentity;
     }
-
-    // get sellerId() {
-    //     return this.sellerIdentity.userSellerIdentity;
-    // }
 
     get name() {
         if (this.sellerInfo === undefined) {
@@ -61,8 +47,8 @@ export class PublicSellerComponent {
         return this.sellerInfo.description;
     }
 
-    getProductsFromUser() {
-        this.profileService.requestProductFromUser().subscribe((result) => {
+    getProductsFromUser(sellerId: string) {
+        this.profileService.requestProductFromSeller(sellerId).subscribe((result) => {
             const newProducts = result as Product[];
             this.products = newProducts;
             console.log(newProducts);

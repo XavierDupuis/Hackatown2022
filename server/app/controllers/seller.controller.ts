@@ -41,6 +41,36 @@ export class SellerController {
                 return res.sendStatus(ERROR);
             }
         });
+
+        this.router.get('/seller-products/:sellerId', async (req, res) => {
+            try {
+                const { sellerId } = req.params;
+                console.log('asdfasdf', sellerId);
+                const activeproducts = await this.activeProductService.getProductsFromSeller(sellerId);
+                console.log(activeproducts);
+                return res.send(activeproducts);
+            } catch (e) {
+                return res.sendStatus(ERROR);
+            }
+        });
+
+        this.router.get('/seller-id/:userId', async (req, res) => {
+            const { userId } = req.params;
+            console.log(userId);
+            if (userId === undefined) {
+                return res.sendStatus(ERROR);
+            }
+            try {
+                const seller = await this.sellerService.getProfileWithUserId(userId);
+                // eslint-disable-next-line no-underscore-dangle
+                const sellerId = seller?._id;
+                return res.send({ sellerId });
+            } catch (e) {
+                console.error(e);
+                return res.sendStatus(ERROR);
+            }
+        });
+
         this.router.get('/history', async (req, res) => {
             try {
                 const { userId } = res.locals;
