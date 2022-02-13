@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Product } from '@app/components/main-page/products/product-card/product.interface';
+import { ProductService } from '@app/services/product-service/product.service';
 
 @Component({
   selector: 'app-new-product',
@@ -12,7 +13,7 @@ export class NewProductComponent implements OnInit {
   quantityAndPrice: FormGroup;
   dates: FormGroup;
 
-  constructor(private formBuilder: FormBuilder /* private productService: ProductService*/) {}
+  constructor(private formBuilder: FormBuilder, private productService: ProductService) {}
 
   ngOnInit(): void {
     this.nameAndDescription = this.formBuilder.group({
@@ -44,18 +45,6 @@ export class NewProductComponent implements OnInit {
       maxPickupDate: new Date(this.dates.controls.maxPickupDate.value),
       productionDate: new Date(this.dates.controls.productionDate.value),
     };
-    console.log(newProduct);
-    // this.newProduct.productService.addProduct(newProduct).subscribe();
-  }
-
-  isDataValid() {
-    //   return this.newProduct.name !== null
-    //     && this.newProduct.description !== null
-    //     && this.newProduct.quantity > 0
-    //     && this.newProduct.price >= 0
-    //     && this.newProduct.maxPickupDate.value !== null
-    //     && this.newProduct.productionDate.value !== null;
-    //
-    return true;
+    this.productService.addProduct(newProduct).subscribe();
   }
 }
