@@ -7,7 +7,7 @@ import { Service } from 'typedi';
 
 @Service()
 export class Server {
-    private static readonly appPort: string | number | boolean = Server.normalizePort(process.env.PORT || '8443');
+    private static readonly appPort: string | number | boolean = Server.normalizePort(process.env.PORT || '443');
     // eslint-disable-next-line @typescript-eslint/no-magic-numbers
     private static readonly baseDix: number = 10;
     private server: https.Server;
