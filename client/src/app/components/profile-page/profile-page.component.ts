@@ -54,6 +54,6 @@ export class ProfilePageComponent implements AfterViewInit {
     }
 
     goToMyPage() {
-        this.router.navigate(['/new-product']);
+        this.router.navigate(['/seller/me']);
     }
 }
