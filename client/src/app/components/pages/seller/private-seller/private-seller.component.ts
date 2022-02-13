@@ -31,8 +31,19 @@ export class PrivateSellerComponent implements AfterViewInit {
     }
 
     ngAfterViewInit() {
-        this.sellerService.currentSeller.subscribe((seller) => {
-            console.log(seller);
+        this.sellerIdentity.userSellerIdentity.subscribe((id) => {
+            console.log('my seller id', id);
+            this.sellerId = id === undefined ? '' : id.id;
+            this.sellerService.getSeller(this.sellerId);
+        });
+        // console.log(this.sellerId);
+        // Todo: if userid is undefined
+        this.sellerService.currentSeller.subscribe((sellerInfo) => {
+            if (sellerInfo !== undefined) {
+                this.sellerInfo = sellerInfo;
+                this.getProductsFromUser();
+                console.log(this.sellerInfo);
+            }
         });
     }
 
