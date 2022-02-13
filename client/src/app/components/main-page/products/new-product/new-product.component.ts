@@ -48,7 +48,7 @@ export class NewProductComponent implements OnInit {
             description: this.nameAndDescription.controls.description.value,
             quantityInitial: this.quantityAndPrice.controls.quantity.value,
             quantityLeft: this.quantityAndPrice.controls.quantity.value,
-            price: this.quantityAndPrice.controls.price.value / 100,
+            price: this.quantityAndPrice.controls.price.value * 100,
             imageURL: this.nameAndDescription.controls.imageLink.value,
             maxPickupDate: new Date(this.dates.controls.maxPickupDate.value),
             productionDate: new Date(this.dates.controls.productionDate.value),
