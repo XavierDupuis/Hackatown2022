@@ -13,6 +13,11 @@ export class ProductService {
         return this.http.get(`${environment.serverURL}/products`);
     }
 
+    requestProduct(id: string) {
+        console.log(id)
+        return this.http.post(`${environment.serverURL}/products/product`, id, { responseType: 'json' });
+    }
+
     requestHistoryList() {
         return this.http.get(`${environment.serverURL}/products/history`);
     }

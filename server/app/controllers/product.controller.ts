@@ -25,6 +25,18 @@ export class ProductController {
             }
         });
 
+        this.router.post('/product', async (req, res) => {
+            try {
+                const productId = req.body as ObjectId;
+                console.log(productId)
+                const product = await this.activeProductService.getProduct(productId);
+                console.log(product)
+                return res.send(product);
+            } catch (e) {
+                return res.sendStatus(ERROR);
+            }
+        });
+
         this.router.post('/', async (req, res) => {
             try {
                 const product = req.body;
