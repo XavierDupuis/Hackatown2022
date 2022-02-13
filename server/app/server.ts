@@ -27,8 +27,8 @@ export class Server {
     async init(): Promise<void> {
         this.application.app.set('port', Server.appPort);
         const option = {
-            key: fs.readFileSync('../../privatekey.pem'),
-            cert: fs.readFileSync('../../server.crt'),
+            key: fs.readFileSync('../privatekey.pem'),
+            cert: fs.readFileSync('../server.crt'),
         };
         this.server = https.createServer(option, this.application.app);
 
