@@ -56,67 +56,6 @@ export class NewProductComponent implements OnInit {
         this.productService.addProduct(newProduct);
         console.log(newProduct)
     }
-
-    // showSelectedFile() {
-    //     const file = this.input.files;
-    //     if (file === null) {
-    //         return;
-    //     }
-    //     const fileName = file[0].name;
-    //     this.selectedFile = fileName;
-    // }
-
-    // async uploadFile() {
-    //     if (this.input.files === null) {
-    //         return;
-    //     }
-    //     const file = this.input.files[0];
-    //     this.selectedFile = '';
-    //     this.uploadImage(file);
-    // }
-
-    // // async uploadImage(file: File) {
-
-    // //     const formData = new FormData();
-    // //     formData.append('image', file);
-    // //     const response = await fetch('https://api.imgur.com/3/image', {
-    // //         method: 'POST',
-    // //         headers: {
-    // //             Authorization: 'Client-ID {4a59258aa10e62d}',
-    // //         },
-    // //         body: formData,
-    // //     });
-    // //     console.log("waiting res")
-    // //     await response.json().then((res) => {
-    // //         console.log(res)
-    // //     })
-    // //     console.log("FILE LINK", this.fileLink);
-    // // }
-
-    // async uploadImage(file: File) {
-    //     const reader = new FileReader();
-    //     reader.readAsDataURL(file);
-    //     reader.onload = () => {
-    //         console.log(reader.result);
-    //         let headers = new HttpHeaders({ 'Authorization': 'Client-ID 546c25a59c58ad7' });
-    //         this.http.post('https://api.imgur.com/3/image', reader.result, { headers: headers }).subscribe((res: any) => {
-    //             this.fileLink = res['data']['link'];
-    //         });
-    //     };
-
-
-    //     // const formData = new FormData();
-    //     // formData.append('image', file);
-    //     // const response = await fetch('https://api.imgur.com/3/image', {
-    //     //     method: 'POST',
-    //     //     headers: {
-    //     //         Authorization: 'Client-ID 4a59258aa10e62d',
-    //     //     },
-    //     //     body: formData,
-    //     // });
-    //     // this.fileLink = responseJson.data.link;
-    //     console.log("FILE LINK", this.fileLink);
-    // }
 }
 
 
