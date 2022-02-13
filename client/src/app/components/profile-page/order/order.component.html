@@ -1,14 +1,4 @@
-<div *ngFor="let product of products">
-    <img class="image" [src]="product.imageURL" />
-    <h2>{{ product.name }}</h2>
-    <div>
-        <i>{{ product.description }}</i>
-    </div>
-    <div>{{ product.price / 100 | currency }}</div>
-    <div>
-        Left Quantity : <strong>{{ product.quantityLeft }}</strong>
-    </div>
-    <div>
-        Last Date : <strong>{{ product.maxPickupDate | date }}</strong>
-    </div>
+<div *ngFor="let product of order.orderedProducts">
+    <h2>{{ product.pickUpDate | date }}</h2>
+    <p>{{ product.quantity }}x</p>
 </div>

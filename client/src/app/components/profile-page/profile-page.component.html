@@ -1,21 +1,21 @@
-<div>
-    <!-- <img src="https://hips.hearstapps.com/hmg-prod/images/homemade-spaghetti-sauce-horizontal-1530890913.jpg" alt="my face" /> -->
-</div>
-<div>
-    <div>{{ user.name }}</div>
-    <div>{{ user.family_name }}</div>
+<mat-card>
+    <h2>{{ user.name }}</h2>
+    <h3>{{ user.family_name }}</h3>
     <div>{{ user.email }}</div>
     <div>{{ user.phone_number | phone }}</div>
+</mat-card>
+<div class="button">
+    <button mat-raised-button (click)="signOut()">SignOut</button>
 </div>
-
-<mat-accordion>
-    <mat-expansion-panel *ngFor="let order of orders" hideToggle>
-        <mat-expansion-panel-header>
-            <mat-panel-title> {{ order.total / 100 | currency }} </mat-panel-title>
-            <mat-panel-description> {{ order.date | date }} </mat-panel-description>
-        </mat-expansion-panel-header>
-        <app-order [order]="order"></app-order>
-    </mat-expansion-panel>
-</mat-accordion>
-
-<button mat-raised-button (click)="signOut()">SignOut</button>
+<mat-card>
+    <h2>My Orders</h2>
+    <mat-accordion>
+        <mat-expansion-panel *ngFor="let order of orders" hideToggle>
+            <mat-expansion-panel-header>
+                <mat-panel-title> {{ order.total / 100 | currency }} </mat-panel-title>
+                <mat-panel-description> {{ order.date | date }} </mat-panel-description>
+            </mat-expansion-panel-header>
+            <app-order [order]="order"></app-order>
+        </mat-expansion-panel>
+    </mat-accordion>
+</mat-card>
