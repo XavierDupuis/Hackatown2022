@@ -24,10 +24,10 @@ const initialAuthState = {
 })
 export class AuthService {
     // readonly isLoggedIn$ = this.auth$.pipe(map((state) => state.isLoggedIn));
-    private readonly _authState = new BehaviorSubject<AuthState>(initialAuthState);
+    private readonly authState = new BehaviorSubject<AuthState>(initialAuthState);
 
     get auth$(): Observable<AuthState> {
-        return this._authState;
+        return this.authState;
     }
 
     get isLoggedIn$() {
@@ -41,7 +41,7 @@ export class AuthService {
         // Get the user on creation of this service
         Auth.currentAuthenticatedUser().then(
             (user: unknown) => this.setUser(user),
-            () => this._authState.next(initialAuthState),
+            () => this.authState.next(initialAuthState),
         );
 
         // Use Hub channel 'auth' to get notified on changes
@@ -50,7 +50,7 @@ export class AuthService {
                 // On 'signIn' event, the data is a CognitoUser object
                 this.setUser(data);
             } else {
-                this._authState.next(initialAuthState);
+                this.authState.next(initialAuthState);
             }
         });
 
@@ -92,7 +92,7 @@ export class AuthService {
             username,
         } = user;
 
-        this._authState.next({ isLoggedIn: true, id, username, email });
+        this.authState.next({ isLoggedIn: true, id, username, email });
     }
 
     private async isLoggedInAsync(): Promise<boolean> {
