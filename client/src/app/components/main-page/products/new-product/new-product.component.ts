@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Product } from '@app/components/main-page/products/product-card/product.interface';
+import { Product } from '@app/interfaces/product.interface';
 import { ProductService } from '@app/services/product-service/product.service';
 
 @Component({
