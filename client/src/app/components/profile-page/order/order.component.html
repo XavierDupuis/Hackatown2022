@@ -1,0 +1,4 @@
+<div *ngFor="let product of order.orderedProducts">
+    <h2>{{ product.pickUpDate | date }}</h2>
+    <p>{{ product.quantity }}x</p>
+</div>

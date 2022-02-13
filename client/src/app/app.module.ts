@@ -27,7 +27,7 @@ import { NewSellerPageComponent } from './components/pages/new-seller-page/new-s
 import { PrivateSellerComponent } from './components/pages/seller/private-seller/private-seller.component';
 import { PublicSellerComponent } from './components/pages/seller/public-seller/public-seller.component';
 import { SellerComponent } from './components/pages/seller/seller.component';
-import { NewSellerComponent } from './components/pages/seller/new-seller/new-seller.component';
+import { OrderComponent } from './components/profile-page/order/order.component';
 
 Amplify.configure(awsmobile);
 
@@ -49,7 +49,7 @@ Amplify.configure(awsmobile);
         SellerComponent,
         PrivateSellerComponent,
         PublicSellerComponent,
-        NewSellerComponent,
+        OrderComponent,
     ],
     imports: [AppMaterialModule, BrowserModule, AppRoutingModule, BrowserAnimationsModule, AmplifyAuthenticatorModule, FormsModule, HttpClientModule],
     providers: [
