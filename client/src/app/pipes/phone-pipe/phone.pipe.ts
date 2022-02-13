@@ -5,15 +5,19 @@ import { Pipe } from "@angular/core";
 })
 export class PhonePipe {
     transform(rawNum: string) {
-        rawNum = rawNum.charAt(0) != '0' ? "0" + rawNum : "" + rawNum;
+        const size = rawNum.length;
+        const thirdPart = [...rawNum].slice(size - 4, size);
+        const secondPart = [...rawNum].slice(size - 7, size - 4);
+        const firstPart = [...rawNum].slice(size - 10, size - 7);
 
-        let newStr = "";
-        let i = 0;
-
-        for (; i < Math.floor(rawNum.length / 2) - 1; i++) {
-            newStr = newStr + rawNum.substr(i * 2, 2) + "-";
+        let result = "";
+        for (const part of [firstPart, secondPart, thirdPart]) {
+            result += '-'
+            for (const num of part) {
+                result += num
+            }
         }
-
-        return newStr + rawNum.substr(i * 2);
+        result = result.slice(1, 13)
+        return result;
     }
 }
