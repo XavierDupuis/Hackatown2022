@@ -11,7 +11,14 @@ import { CartService } from '@app/services/cart-service/cart.service';
 export class HeaderBarComponent implements OnInit {
     @Input() title!: string;
 
-    constructor(private cartService: CartService, public dialog: MatDialog) {}
+    constructor(private cartService: CartService, public dialog: MatDialog) {
+        this.cartService.selectedProductsSubject.subscribe((selectedProducts) => {
+            const didCartBecomeEmpty = selectedProducts.length === 0;
+            if (didCartBecomeEmpty) {
+                this.closeCart();
+            }
+        })
+    }
 
     get numberOfItemsInCart() {
         return this.cartService.selectedProducts.length;
@@ -24,5 +31,9 @@ export class HeaderBarComponent implements OnInit {
             width: '80%',
             height: '60%',
         });
+    }
+
+    closeCart() {
+        this.dialog.closeAll();
     }
 }

@@ -2,7 +2,7 @@
     <mat-stepper orientation="vertical" #stepper>
         <mat-step [stepControl]="nameAndDescription">
             <form [formGroup]="nameAndDescription">
-                <ng-template matStepLabel>Meal Name and Description</ng-template>
+                <ng-template matStepLabel>Meal Name, Description and Image</ng-template>
                 <mat-form-field appearance="fill">
                     <mat-label>Name</mat-label>
                     <input matInput formControlName="name" required />
@@ -10,6 +10,10 @@
                 <mat-form-field appearance="fill">
                     <mat-label>Description</mat-label>
                     <input matInput formControlName="description" required />
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-label>Image Link</mat-label>
+                    <input matInput formControlName="imageLink" required />
                 </mat-form-field>
                 <div>
                     <button mat-button matStepperNext>Next</button>
@@ -62,7 +66,7 @@
     </mat-stepper>
 </mat-card>
 
-<input type="file" name="" accept="images" #fileInput (change)="showSelectedFile()" />
+<!-- <input type="file" name="" accept="images" #fileInput (change)="showSelectedFile()" />
 <button mat-raised-button (click)="fileInput.click()">Choisir une image à téléverser</button>
 <div class="file">
     <p>{{ selectedFile }}</p>
@@ -70,4 +74,4 @@
 <div class="buttons">
     <button mat-raised-button matDialogClose>Annuler</button>
     <button mat-raised-button [disabled]="selectedFile === ''" (click)="uploadFile()">Téléverser</button>
-</div>
+</div> -->

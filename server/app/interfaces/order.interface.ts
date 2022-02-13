@@ -1,4 +1,4 @@
-import { OrderedProduct as OrderedProduct } from '@app/interfaces/ordered-product.interface';
+import { OrderedProduct } from '@app/interfaces/ordered-product.interface';
 
 export interface Order {
     userId: string;

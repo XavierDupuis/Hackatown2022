@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { ProductAddedToCart } from '@app/interfaces/product.interface';
 import { CartService } from '@app/services/cart-service/cart.service';
-import { ProfileService } from '@app/services/profile-service/profile.service';
 
 @Component({
     selector: 'app-cart-modal',
@@ -11,7 +10,7 @@ import { ProfileService } from '@app/services/profile-service/profile.service';
 export class CartModalComponent {
     displayedColumns = ['name', 'price', 'quantity', 'subtotal', 'remove'];
 
-    constructor(private cartService: CartService, private profileService: ProfileService) {}
+    constructor(private cartService: CartService) {}
 
     get cartProducts() {
         return this.cartService.selectedProductsSubject;
@@ -33,6 +32,6 @@ export class CartModalComponent {
     }
 
     confirmOrder() {
-        this.profileService.addOrder(this.cartProducts.value, this.totalCost);
+        this.cartService.addOrder(this.cartProducts.value, this.totalCost);
     }
 }

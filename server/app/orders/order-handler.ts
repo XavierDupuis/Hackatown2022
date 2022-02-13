@@ -16,7 +16,6 @@ export class OrderHandler {
 
     async createOrder(orderUI: OrderUI, userId: string): Promise<boolean> {
         // TODO validate orderinfo
-        console.log(orderUI);
         for (const orderedProduct of orderUI.orderedProducts) {
             const product = await this.activeProducts.getProduct(new ObjectId(orderedProduct.productId));
             if (product === null) {
